@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scripts/interactable_object.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/interactable_objects/fire.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/interactable_objects/fire_highlighted.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
 
 [node name="Object" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,3 +14,8 @@ highlighted_texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )

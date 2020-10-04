@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/scripts/inventory_gui.gd" type="Script" id=1]
+
+[node name="Inventory" type="MarginContainer"]
+margin_right = 140.0
+margin_bottom = 80.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 140.0
+margin_bottom = 80.0
+
+[node name="kinship" type="Label" parent="Panel"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "kinship: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fear" type="Label" parent="Panel"]
+margin_left = 5.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 14.0
+text = "fear: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}

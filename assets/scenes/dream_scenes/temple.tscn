@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/test.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/scenes/dream_scenes/object.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/dream_scenes/kinship.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/scenes/dream_scenes/fear.tscn" type="PackedScene" id=4]
 
 [node name="ImportRoot" type="Node2D"]
 
@@ -9,10 +12,22 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
-tile_data = PoolIntArray( -1703936, 0, 0, -1703934, 0, 0, -1703932, 0, 0, -1703930, 0, 0, -1703928, 0, 0, -1703926, 0, 0, -1703924, 0, 0, -1507330, 0, 0, -1572850, 0, 0, -1376258, 0, 0, -1441778, 0, 0, -1245186, 0, 0, -1310706, 0, 0, -1114114, 0, 0, -1179634, 0, 0, -983042, 0, 0, -1048562, 0, 0, -851970, 0, 0, -917490, 0, 0, -720898, 0, 0, -786432, 0, 0, -786420, 0, 0, -786418, 0, 0, -655360, 0, 0, -655358, 0, 0, -655350, 0, 0, -655348, 0, 0, -524286, 0, 0, -524278, 0, 0, -393214, 0, 0, -393206, 0, 0, -262142, 0, 0, -262134, 0, 0, -131070, 1610612736, 0, -131068, 1610612736, 0, -131064, 1610612736, 0, -131062, 1610612736, 0 )
+tile_data = PoolIntArray( -1835006, 0, 0, -1835004, 0, 0, -1835002, 0, 0, -1835000, 0, 0, -1834998, 0, 0, -1834996, 0, 0, -1834994, 0, 0, -1703936, 0, 0, -1703920, 0, 0, -1572864, 0, 0, -1572848, 0, 0, -1441792, 0, 0, -1441776, 0, 0, -1310720, 0, 0, -1310704, 0, 0, -1179648, 0, 0, -1179632, 0, 0, -1048576, 0, 0, -1048560, 0, 0, -917504, 0, 0, -917502, 0, 0, -917490, 0, 0, -917488, 0, 0, -786430, 0, 0, -786428, 0, 0, -786420, 0, 0, -786418, 0, 0, -655356, 0, 0, -655348, 0, 0, -524284, 0, 0, -524276, 0, 0, -393212, 0, 0, -393204, 0, 0, -262140, 1610612736, 0, -262138, 1610612736, 0, -262134, 1610612736, 0, -262132, 1610612736, 0 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="EntryPoint" type="Position2D" parent="."]
-position = Vector2( 56, -8 )
+position = Vector2( 72, -24 )
+
+[node name="Kinship2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 92, -40 )
+
+[node name="Kinship" parent="." instance=ExtResource( 3 )]
+position = Vector2( 92, -64 )
+
+[node name="Object" parent="." instance=ExtResource( 2 )]
+position = Vector2( 52, -44 )
+
+[node name="Fear" parent="." instance=ExtResource( 4 )]
+position = Vector2( 52, -64 )

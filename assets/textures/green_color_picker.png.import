@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/orange_pigment.png-95496f52e080946cb58da36b31c91999.stex"
+path="res://.import/green_color_picker.png-a1777791856b326aa81e43786d013d4b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/interactable_objects/orange_pigment.png"
-dest_files=[ "res://.import/orange_pigment.png-95496f52e080946cb58da36b31c91999.stex" ]
+source_file="res://assets/textures/green_color_picker.png"
+dest_files=[ "res://.import/green_color_picker.png-a1777791856b326aa81e43786d013d4b.stex" ]
 
 [params]
 

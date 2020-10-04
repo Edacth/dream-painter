@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/scenes/inventory_gui.tscn" type="PackedScene" id=1]
+
+[node name="DreamGUI" type="CanvasLayer"]
+
+[node name="Debug" type="MarginContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -143.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Debug"]
+margin_right = 143.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwitchButton" type="Button" parent="Debug/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.5
+margin_top = -12.5
+margin_right = 58.5
+margin_bottom = 12.5
+text = "Switch to Real"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" parent="." instance=ExtResource( 1 )]

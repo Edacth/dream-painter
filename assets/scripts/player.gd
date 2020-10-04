@@ -1,10 +1,10 @@
 extends Node2D
 
 var move_increment = 8
-onready var terrain_map : TileMap = get_node("/root/Root/TerrainTileMap")
+onready var terrain_map : TileMap
 onready var kinematicBody: KinematicBody2D = get_node("KinematicBody2D")
 var nearest_interactable_object: Interactable_Object = null
-onready var interact_distance = 9
+onready var interact_distance = 13
 
 func _ready():
 	pass # Replace with function body. 

@@ -8,9 +8,11 @@ var pigment_count = 0
 func _ready():
 	real_root = $RealWorld
 	dream_root = $DreamWorld
-	connect_pickup_signals()
-	$RealWorld/CanvasLayer/MarginContainer/Panel/SwitchButton.connect("button_down", self, "switch_to_state", ["dream"])
-	$DreamWorld/CanvasLayer/MarginContainer/Panel/SwitchButton.connect("button_down", self, "switch_to_state", ["real"])
+	$DreamWorld/Player.terrain_map = $DreamWorld/TerrainTileMap
+	var _err = $RealWorld/RealGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_to_state", ["dream"])
+	_err = $DreamWorld/DreamGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_to_state", ["real"])
+	_err = $DreamWorld/Importer.connect("importing_finished", self, "connect_pickup_signals")
+	connect_inv_gui_signals()
 	switch_to_state(state)
 	
 
@@ -25,7 +27,8 @@ func switch_to_state(to_state):
 		self.add_child(real_root)
 		self.remove_child(dream_root)
 	elif to_state == "dream":
-		self.add_child(dream_root)
+		if dream_root.get_parent() == null:
+			self.add_child(dream_root)
 		self.remove_child(real_root)
 		
 func connect_pickup_signals():
@@ -35,6 +38,8 @@ func connect_pickup_signals():
 			obj.connect("picked_up", self, "process_pickup")
 			
 func process_pickup(item_id):
-	if item_id == "orange_pigment":
-		pigment_count += 1
-		print("LOL")
+	$Inventory.add_item(item_id, 1)
+		
+func connect_inv_gui_signals():
+	var _err = $Inventory.connect("inventory_updated", $DreamWorld/DreamGUI/Inventory, "update_display")
+	_err = $Inventory.connect("inventory_updated", $RealWorld/RealGUI/Inventory, "update_display")

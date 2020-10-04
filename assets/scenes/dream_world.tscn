@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/scenes/dream_scenes/orange_pigment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scenes/dream_gui.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/dream_gui.gd" type="Script" id=2]
 [ext_resource path="res://assets/scripts/importer.gd" type="Script" id=3]
 [ext_resource path="res://assets/scenes/dream_scenes/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/scenes/dream_scenes/object.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/test.tres" type="TileSet" id=6]
 
 [node name="DreamWorld" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TerrainTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 6 )
 cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
@@ -22,43 +22,5 @@ script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
-[node name="Object" parent="." instance=ExtResource( 5 )]
-position = Vector2( 8, -16 )
-
-[node name="Object2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -8, -16 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -143.0
-margin_bottom = 33.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer"]
-margin_right = 143.0
-margin_bottom = 33.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SwitchButton" type="Button" parent="CanvasLayer/MarginContainer/Panel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -58.5
-margin_top = -12.5
-margin_right = 58.5
-margin_bottom = 12.5
-text = "Switch to Real"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OrangePigment" parent="." instance=ExtResource( 1 )]
-position = Vector2( -8.48042, -39.3587 )
+[node name="DreamGUI" parent="." instance=ExtResource( 1 )]
+script = ExtResource( 2 )
