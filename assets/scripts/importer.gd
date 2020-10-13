@@ -1,40 +1,37 @@
 extends Node2D
 
-signal importing_finished
-
-func _ready():
-	pass
-
-func _unhandled_input(event):
-	if event.is_action_pressed("test1"):
-		import_scene("res://assets/scenes/dream_scenes/temple.tscn", Vector2(0, 0), false)
-		#import_scene("res://assets/scenes/temple.tscn", Vector2(0, -12), false)
-		#import_scene("res://assets/scenes/temple.tscn", Vector2(10, -12), false)
-		emit_signal("importing_finished")
-
 func import_scene(path, import_position, import_air):
 	var scene_to_import = load(path)
 	var scene_instance = scene_to_import.instance()
+	# Add scene as child of importer in order to have its nodes and cells copied
 	self.add_child(scene_instance, true)
 	var instance_root = $"ImportRoot"
 	var instance_offset = ($"ImportRoot/EntryPoint").position
-	instance_root.position -=  import_position + instance_offset
+	instance_root.position -= import_position + instance_offset
 	merge_tilemap($"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
+	# Copy remaining child nodes. These are objects of the room.
 	for obj in instance_root.get_children():
 		var old_parent = obj.get_parent()
 		var new_parent = self.get_parent()
 		old_parent.remove_child(obj)
-		#new_parent.call_deferred("add_child", obj)
 		new_parent.add_child(obj)
-		obj.position -= instance_offset
+		obj.position -= instance_offset - (import_position * 8)
 	instance_root.queue_free()
 	self.remove_child(instance_root)
 
 func merge_tilemap(new_tilemap: TileMap, offset, import_position, import_air):
+	var used_cells = new_tilemap.get_used_cells()
+	var new_tilemap_size = Vector2(0, 0)
+	for cell in used_cells:
+		if cell.x > new_tilemap_size.x:
+			new_tilemap_size.x = cell.x
+		if cell.y > new_tilemap_size.y:
+			new_tilemap_size.y = cell.y
+	print(str(new_tilemap_size))
 	var main_tilemap: TileMap = get_parent().get_node("TerrainTileMap")
 	var tile_offset = Vector2(offset.x /8, offset.y /8)
-	for i in range(20):
-		for j in range(0,-20,-1):
+	for i in range(new_tilemap_size.x+1):
+		for j in range(new_tilemap_size.y+1):
 			var cell = new_tilemap.get_cell(i, j)
 			if import_air == false and cell == -1:
 				continue

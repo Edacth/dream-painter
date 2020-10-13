@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/test.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/scenes/dream_scenes/fear.tscn" type="PackedScene" id=2]
+
+[node name="ImportRoot" type="Node2D"]
+
+[node name="TerrainTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 10, 5, 0, 12, 5, 0, 14, 5, 0, 16, 5, 0, 18, 5, 0, 65544, 5, 0, 65556, 5, 0, 196614, 5, 0, 327686, 5, 0, 327694, 5, 0, 327696, 5, 0, 327698, 5, 0, 327700, 5, 0, 458756, 5, 0, 458766, 5, 0, 589828, 5, 0, 589836, 5, 0, 720900, 5, 0, 720908, 5, 0, 720910, 5, 0, 851972, 5, 0, 851983, 5, 0, 983044, 5, 0, 983055, 5, 0, 1114118, 5, 0, 1114126, 5, 0, 1245190, 5, 0, 1245198, 5, 0, 1376264, 5, 0, 1376268, 5, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EntryPoint" type="Position2D" parent="."]
+position = Vector2( 88, 176 )
+
+[node name="Fear" parent="." instance=ExtResource( 2 )]
+position = Vector2( 116, 116 )

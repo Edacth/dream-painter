@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/scripts/color_picker.gd" type="Script" id=4]
 [ext_resource path="res://assets/scripts/color_button.gd" type="Script" id=5]
 
+
+
 [node name="ColorPicker" type="Panel"]
 margin_right = 105.0
 margin_bottom = 100.0

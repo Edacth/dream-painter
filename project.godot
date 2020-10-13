@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 Dir2Vec="*res://assets/scripts/dir2Vec.gd"
 ColorCaster="*res://assets/scripts/color_caster.gd"
+ShapeLibrary="*res://assets/scripts/shape_library.gd"
 
 [input]
 

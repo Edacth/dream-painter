@@ -12,22 +12,22 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
-tile_data = PoolIntArray( -1835006, 0, 0, -1835004, 0, 0, -1835002, 0, 0, -1835000, 0, 0, -1834998, 0, 0, -1834996, 0, 0, -1834994, 0, 0, -1703936, 0, 0, -1703920, 0, 0, -1572864, 0, 0, -1572848, 0, 0, -1441792, 0, 0, -1441776, 0, 0, -1310720, 0, 0, -1310704, 0, 0, -1179648, 0, 0, -1179632, 0, 0, -1048576, 0, 0, -1048560, 0, 0, -917504, 0, 0, -917502, 0, 0, -917490, 0, 0, -917488, 0, 0, -786430, 0, 0, -786428, 0, 0, -786420, 0, 0, -786418, 0, 0, -655356, 0, 0, -655348, 0, 0, -524284, 0, 0, -524276, 0, 0, -393212, 0, 0, -393204, 0, 0, -262140, 1610612736, 0, -262138, 1610612736, 0, -262134, 1610612736, 0, -262132, 1610612736, 0 )
+tile_data = PoolIntArray( 2, 0, 0, 4, 0, 0, 6, 0, 0, 10, 0, 0, 12, 0, 0, 14, 0, 0, 131072, 0, 0, 131088, 0, 0, 262144, 0, 0, 262160, 0, 0, 393216, 0, 0, 393224, 0, 0, 393232, 0, 0, 524288, 0, 0, 524304, 0, 0, 655360, 0, 0, 655376, 0, 0, 786432, 0, 0, 786448, 0, 0, 917504, 0, 0, 917506, 0, 0, 917518, 0, 0, 917520, 0, 0, 1048578, 0, 0, 1048580, 0, 0, 1048588, 0, 0, 1048590, 0, 0, 1179652, 0, 0, 1179660, 0, 0, 1310724, 0, 0, 1310732, 0, 0, 1441796, 0, 0, 1441804, 0, 0, 1572868, 0, 0, 1572870, 0, 0, 1572874, 0, 0, 1572876, 0, 0 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="EntryPoint" type="Position2D" parent="."]
-position = Vector2( 72, -24 )
-
-[node name="Kinship2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 92, -40 )
+position = Vector2( 72, 200 )
 
 [node name="Kinship" parent="." instance=ExtResource( 3 )]
-position = Vector2( 92, -64 )
+position = Vector2( 92, 152 )
+
+[node name="Kinship2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 92, 176 )
 
 [node name="Object" parent="." instance=ExtResource( 2 )]
-position = Vector2( 52, -44 )
+position = Vector2( 52, 172 )
 
 [node name="Fear" parent="." instance=ExtResource( 4 )]
-position = Vector2( 52, -64 )
+position = Vector2( 52, 152 )

@@ -1,6 +1,6 @@
 extends Node2D
 
-var state = "dream"
+var state = "real"
 var real_root
 var dream_root
 var pigment_count = 0
@@ -11,7 +11,8 @@ func _ready():
 	$DreamWorld/Player.terrain_map = $DreamWorld/TerrainTileMap
 	var _err = $RealWorld/RealGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_to_state", ["dream"])
 	_err = $DreamWorld/DreamGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_to_state", ["real"])
-	_err = $DreamWorld/Importer.connect("importing_finished", self, "connect_pickup_signals")
+	_err = $DreamWorld.connect("generation_finished", self, "connect_pickup_signals")
+	$RealWorld/RealGUI.dream_button_up_func = funcref(self, "enter_dream")
 	connect_inv_gui_signals()
 	switch_to_state(state)
 	
@@ -24,7 +25,8 @@ func _unhandled_input(event):
 	
 func switch_to_state(to_state):
 	if to_state == "real":
-		self.add_child(real_root)
+		if real_root.get_parent() == null:
+			self.add_child(real_root)
 		self.remove_child(dream_root)
 	elif to_state == "dream":
 		if dream_root.get_parent() == null:
@@ -43,3 +45,7 @@ func process_pickup(item_id):
 func connect_inv_gui_signals():
 	var _err = $Inventory.connect("inventory_updated", $DreamWorld/DreamGUI/Inventory, "update_display")
 	_err = $Inventory.connect("inventory_updated", $RealWorld/RealGUI/Inventory, "update_display")
+
+func enter_dream():
+	dream_root.generate_world()
+	switch_to_state("dream")

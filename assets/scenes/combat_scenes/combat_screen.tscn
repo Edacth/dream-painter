@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/textures/combat_screen/cursored_cell.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/piazzolla.tres" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/scripts/combat_grid.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.721569, 0.721569, 0.721569, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+font_data = ExtResource( 3 )
+
+[node name="CombatScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPanel" type="Panel" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="VBoxContainer/TopPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.0
+margin_top = -57.0
+margin_right = 130.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 2 )
+text = "Big Bad"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomPanel" type="Panel" parent="VBoxContainer"]
+margin_top = 240.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CombatGrid" type="Control" parent="VBoxContainer/BottomPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = 150.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/BottomPanel/CombatGrid"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = 150.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CursorCell" type="TextureRect" parent="VBoxContainer/BottomPanel/CombatGrid"]
+margin_right = 60.0
+margin_bottom = 60.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlacedCells" type="Control" parent="VBoxContainer/BottomPanel/CombatGrid"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
