@@ -7,8 +7,33 @@ func _ready() -> void:
 	print(cell_shapes)
 
 func read_shapes() -> void:
+	# Test
 	var cells = [Cell.new(Vector2(0, 0), 0)]
 	var shape = CellShape.new("Test", cells)
+	cell_shapes.append(shape)
+	
+	# Tall
+	cells = [
+		Cell.new(Vector2(0, 0), 0),
+		Cell.new(Vector2(0, -1), 0)]
+	shape = CellShape.new("Tall", cells)
+	cell_shapes.append(shape)
+	
+	# Sword
+	cells = [
+		Cell.new(Vector2(0, 0), 2),
+		Cell.new(Vector2(0, -1), 0),
+		Cell.new(Vector2(0, -2), 0)]
+	shape = CellShape.new("Sword", cells)
+	cell_shapes.append(shape)
+	
+	# Shield
+	cells = [
+		Cell.new(Vector2(0, 0), 2),
+		Cell.new(Vector2(0, -1), 1),
+		Cell.new(Vector2(1, 0), 1),
+		Cell.new(Vector2(1, -1), 1)]
+	shape = CellShape.new("Shield", cells)
 	cell_shapes.append(shape)
 	
 func get_shape(name: String) -> CellShape:
@@ -27,8 +52,8 @@ class CellShape:
 	
 class Cell:
 	var position
-	var id = 0
+	var type = 0
 	
-	func _init(_position: Vector2, _id: int):
+	func _init(_position: Vector2, _type: int):
 		position = _position
-		id = _id
+		type = _type

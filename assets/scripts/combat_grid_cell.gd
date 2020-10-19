@@ -12,5 +12,5 @@ func _notification(what):
 			on_hover()
 
 func on_hover():
-	if mouse_enter_response.is_valid():
+	if is_instance_valid(mouse_enter_response) && mouse_enter_response.is_valid():
 		mouse_enter_response.call_func(id)
