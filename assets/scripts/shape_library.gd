@@ -9,14 +9,14 @@ func _ready() -> void:
 func read_shapes() -> void:
 	# Test
 	var cells = [Cell.new(Vector2(0, 0), 0)]
-	var shape = CellShape.new("Test", cells)
+	var shape = CellShape.new("test", cells)
 	cell_shapes.append(shape)
 	
 	# Tall
 	cells = [
 		Cell.new(Vector2(0, 0), 0),
 		Cell.new(Vector2(0, -1), 0)]
-	shape = CellShape.new("Tall", cells)
+	shape = CellShape.new("tall", cells)
 	cell_shapes.append(shape)
 	
 	# Sword
@@ -24,7 +24,7 @@ func read_shapes() -> void:
 		Cell.new(Vector2(0, 0), 2),
 		Cell.new(Vector2(0, -1), 0),
 		Cell.new(Vector2(0, -2), 0)]
-	shape = CellShape.new("Sword", cells)
+	shape = CellShape.new("sword", cells)
 	cell_shapes.append(shape)
 	
 	# Shield
@@ -33,7 +33,7 @@ func read_shapes() -> void:
 		Cell.new(Vector2(0, -1), 1),
 		Cell.new(Vector2(1, 0), 1),
 		Cell.new(Vector2(1, -1), 1)]
-	shape = CellShape.new("Shield", cells)
+	shape = CellShape.new("shield", cells)
 	cell_shapes.append(shape)
 	
 func get_shape(name: String) -> CellShape:

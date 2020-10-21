@@ -1,12 +1,17 @@
 extends Control
 
+class_name CombatGrid
+
 onready var cell_node = preload("res://assets/scenes/combat_scenes/grid_cell.tscn")
 onready var red_tint = preload("res://assets/textures/combat_screen/red_tint.png")
 onready var blue_tint = preload("res://assets/textures/combat_screen/blue_tint.png")
 onready var grey_tint = preload("res://assets/textures/combat_screen/grey_tint.png")
+onready var cursored_cell_texture = preload("res://assets/textures/combat_screen/cursored_cell.png")
 export var grid_size: Vector2 = Vector2(7,7)
-var cursored_cell = 0
+var cursored_cell = -1
 var selected_shape: String
+onready var energy: int = 4
+var energy_label
 
 func _ready():
 	create_cells(grid_size)
@@ -18,7 +23,8 @@ func create_cells(size: Vector2):
 	for i in range(size.x * size.y):
 		var new_cell = cell_node.instance()
 		new_cell.id = i
-		new_cell.mouse_enter_response = funcref(self, "move_cursor_cell_to_id")
+		new_cell.mouse_enter_response = funcref(self, "set_cursor_cell")
+		new_cell.mouse_exit_response = funcref(self, "clear_cursor_cell")
 		new_cell.name = "GridCell" + str(i)
 		grid.add_child(new_cell)
 
@@ -27,15 +33,19 @@ func resize_cursor_cell():
 	$CursorCell.rect_size.x = $GridContainer.rect_size.x / grid_size.x
 	$CursorCell.rect_size.y = $GridContainer.rect_size.y / grid_size.y
 
-func move_cursor_cell_to_id(id: int):
+func set_cursor_cell(id: int):
 	cursored_cell = id
-	$CursorCell.rect_position = get_node("GridContainer/GridCell" + str(id)).rect_position
+	get_node("GridContainer/GridCell" + str(cursored_cell) + "/Cursor").texture = cursored_cell_texture
 
-func place_shape(shape_name: String):
+func clear_cursor_cell(id: int):
+	cursored_cell = -1
+	get_node("GridContainer/GridCell" + str(id) + "/Cursor").texture = null
+
+func place_shape(shape_name: String, placement_id: int):
 	var shape: ShapeLibrary.CellShape = ShapeLibrary.get_shape(shape_name)
+	if shape == null: return
 	for cell in shape.cells:
-		#print(get_relative_cell_id(cursored_cell, cell.position))
-		var place_position = get_relative_cell_id(cursored_cell, cell.position)
+		var place_position = get_relative_cell_id(placement_id, cell.position)
 		if place_position != -1:
 			place_cell(place_position, cell.type)
 
@@ -59,10 +69,14 @@ func get_relative_cell_id(start_id: int, offset: Vector2) -> int:
 		return relative_cell_id
 	# Not a valid cell
 	return -1
+	
+func change_shape(new_shape: String):
+	selected_shape = new_shape
+	print(selected_shape)
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
-			#place_cell(cursored_cell, "sword")
-			#place_shape("Test")
-			place_shape("Shield")
+		if event.button_index == BUTTON_LEFT && event.pressed && cursored_cell != -1 && energy > 0:
+			place_shape(selected_shape, cursored_cell)
+			energy -= 1
+			energy_label.text = str(energy)

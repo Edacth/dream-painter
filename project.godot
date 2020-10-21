@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "CombatGrid",
+"language": "GDScript",
+"path": "res://assets/scripts/combat_grid.gd"
+}, {
 "base": "Node",
 "class": "Interactable_Object",
 "language": "GDScript",
 "path": "res://assets/scripts/interactable_object.gd"
 } ]
 _global_script_class_icons={
+"CombatGrid": "",
 "Interactable_Object": ""
 }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/textures/combat_screen/cursored_cell.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/shape_bar_gui.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/scripts/combat_grid.gd" type="Script" id=4]
 [ext_resource path="res://assets/textures/combat_screen/weapons/shield.png" type="Texture" id=5]
 [ext_resource path="res://assets/scripts/shape_bar_button.gd" type="Script" id=6]
+[ext_resource path="res://assets/scripts/combat_screen.gd" type="Script" id=7]
+[ext_resource path="res://assets/scripts/enemy_ai.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.721569, 0.721569, 0.721569, 1 )
@@ -17,9 +19,14 @@ font_data = ExtResource( 3 )
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.239086, 0.239086, 0.266113, 1 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 35
+font_data = ExtResource( 3 )
+
 [node name="CombatScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -97,8 +104,10 @@ __meta__ = {
 }
 
 [node name="CursorCell" type="TextureRect" parent="VBoxContainer/BottomPanel/CombatGrid"]
+visible = false
 margin_right = 60.0
 margin_bottom = 60.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -110,7 +119,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="VBoxContainer/BottomPanel"]
+[node name="ShapeBar" type="Panel" parent="VBoxContainer/BottomPanel"]
 anchor_left = 0.18
 anchor_top = 0.05
 anchor_right = 0.27
@@ -125,7 +134,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/BottomPanel/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/BottomPanel/ShapeBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 8
@@ -134,7 +143,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer/BottomPanel/Panel/VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/BottomPanel/ShapeBar/VBoxContainer"]
 margin_top = 48.0
 margin_right = 91.0
 margin_bottom = 118.0
@@ -145,7 +154,7 @@ stretch_mode = 5
 script = ExtResource( 6 )
 shape_type = "shield"
 
-[node name="TextureButton2" type="TextureButton" parent="VBoxContainer/BottomPanel/Panel/VBoxContainer"]
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer/BottomPanel/ShapeBar/VBoxContainer"]
 margin_top = 126.0
 margin_right = 91.0
 margin_bottom = 196.0
@@ -154,9 +163,9 @@ texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 6 )
-shape_type = "2"
+shape_type = "sword"
 
-[node name="TextureButton3" type="TextureButton" parent="VBoxContainer/BottomPanel/Panel/VBoxContainer"]
+[node name="TextureButton3" type="TextureButton" parent="VBoxContainer/BottomPanel/ShapeBar/VBoxContainer"]
 margin_top = 204.0
 margin_right = 91.0
 margin_bottom = 274.0
@@ -166,3 +175,53 @@ expand = true
 stretch_mode = 5
 script = ExtResource( 6 )
 shape_type = "3"
+
+[node name="EnergyBar" type="Panel" parent="VBoxContainer/BottomPanel"]
+anchor_left = 0.73
+anchor_top = 0.05
+anchor_right = 0.82
+anchor_bottom = 0.95
+margin_left = 0.47998
+margin_top = -0.962467
+margin_right = -0.480042
+margin_bottom = -1.28247
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyLabel" type="Label" parent="VBoxContainer/BottomPanel/EnergyBar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.9438
+margin_top = 0.943878
+margin_right = 19.0562
+margin_bottom = 50.9439
+custom_fonts/font = SubResource( 4 )
+text = "3"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/BottomPanel/EnergyBar"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -19.84
+margin_right = -0.199944
+margin_bottom = 50.16
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemyAI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
