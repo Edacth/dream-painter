@@ -1,6 +1,10 @@
 extends Control
 
+class_name CombatGridCell
+
 var id: int
+var type: int
+var enemy_type: int
 var mouse_enter_response
 var mouse_exit_response
 

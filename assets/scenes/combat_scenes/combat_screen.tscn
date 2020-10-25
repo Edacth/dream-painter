@@ -1,19 +1,25 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/textures/combat_screen/cursored_cell.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/shape_bar_gui.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/combat_screen/shape_bar_gui.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/piazzolla.tres" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/scripts/combat_grid.gd" type="Script" id=4]
+[ext_resource path="res://assets/scripts/combat_screen/combat_grid.gd" type="Script" id=4]
 [ext_resource path="res://assets/textures/combat_screen/weapons/shield.png" type="Texture" id=5]
-[ext_resource path="res://assets/scripts/shape_bar_button.gd" type="Script" id=6]
-[ext_resource path="res://assets/scripts/combat_screen.gd" type="Script" id=7]
-[ext_resource path="res://assets/scripts/enemy_ai.gd" type="Script" id=8]
+[ext_resource path="res://assets/scripts/combat_screen/shape_bar_button.gd" type="Script" id=6]
+[ext_resource path="res://assets/scripts/combat_screen/combat_screen.gd" type="Script" id=7]
+[ext_resource path="res://assets/scripts/combat_screen/enemy_ai.gd" type="Script" id=8]
+[ext_resource path="res://assets/textures/combat_screen/end_turn_button.png" type="Texture" id=9]
+[ext_resource path="res://assets/scripts/combat_screen/end_turn_button.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.721569, 0.721569, 0.721569, 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 80
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -62,6 +68,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="EnemyHealth" type="Label" parent="VBoxContainer/TopPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 188.0
+margin_top = -29.0
+margin_right = 370.999
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 5 )
+text = "Health: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BottomPanel" type="Panel" parent="VBoxContainer"]
 margin_top = 240.0
 margin_right = 1024.0
@@ -69,6 +90,17 @@ margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerHealth" type="Label" parent="VBoxContainer/BottomPanel"]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 182.999
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 5 )
+text = "Health: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -174,7 +206,7 @@ texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 6 )
-shape_type = "3"
+shape_type = "down_sword"
 
 [node name="EnergyBar" type="Panel" parent="VBoxContainer/BottomPanel"]
 anchor_left = 0.73
@@ -204,16 +236,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer/BottomPanel/EnergyBar"]
+[node name="RotateButton" type="TextureButton" parent="VBoxContainer/BottomPanel/EnergyBar"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -19.84
-margin_right = -0.199944
-margin_bottom = 50.16
+margin_left = 3.77551
+margin_top = -38.7755
+margin_right = 3.57557
+margin_bottom = 30.2245
 texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndTurnButton" type="TextureButton" parent="VBoxContainer/BottomPanel/EnergyBar"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -48.464
+margin_top = -74.0
+margin_right = 48.464
+margin_bottom = -5.0
+texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

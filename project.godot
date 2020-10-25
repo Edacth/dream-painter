@@ -12,15 +12,21 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "CombatGrid",
 "language": "GDScript",
-"path": "res://assets/scripts/combat_grid.gd"
+"path": "res://assets/scripts/combat_screen/combat_grid.gd"
+}, {
+"base": "Control",
+"class": "CombatGridCell",
+"language": "GDScript",
+"path": "res://assets/scripts/combat_screen/combat_grid_cell.gd"
 }, {
 "base": "Node",
 "class": "Interactable_Object",
 "language": "GDScript",
-"path": "res://assets/scripts/interactable_object.gd"
+"path": "res://assets/scripts/dream/interactable_object.gd"
 } ]
 _global_script_class_icons={
 "CombatGrid": "",
+"CombatGridCell": "",
 "Interactable_Object": ""
 }
 
@@ -32,9 +38,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Dir2Vec="*res://assets/scripts/dir2Vec.gd"
-ColorCaster="*res://assets/scripts/color_caster.gd"
-ShapeLibrary="*res://assets/scripts/shape_library.gd"
+Dir2Vec="*res://assets/scripts/autoload/dir2Vec.gd"
+ColorCaster="*res://assets/scripts/autoload/color_caster.gd"
+ShapeLibrary="*res://assets/scripts/autoload/shape_library.gd"
 
 [input]
 
