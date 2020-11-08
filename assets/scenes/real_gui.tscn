@@ -8,12 +8,6 @@
 [ext_resource path="res://assets/scripts/real/real_gui.gd" type="Script" id=6]
 [ext_resource path="res://assets/scripts/real/navbar_button.gd" type="Script" id=7]
 
-
-
-
-
-
-
 [node name="RealGUI" type="CanvasLayer"]
 script = ExtResource( 6 )
 
@@ -206,6 +200,9 @@ margin_left = -200.0
 margin_top = -100.0
 margin_right = 200.0
 margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DreamButton" type="Button" parent="Bedroom/Panel"]
 anchor_left = 0.5

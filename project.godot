@@ -19,15 +19,33 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/combat_screen/combat_grid_cell.gd"
 }, {
+"base": "Node2D",
+"class": "Importer",
+"language": "GDScript",
+"path": "res://assets/scripts/dream/importer.gd"
+}, {
 "base": "Node",
 "class": "Interactable_Object",
 "language": "GDScript",
 "path": "res://assets/scripts/dream/interactable_object.gd"
+}, {
+"base": "Node",
+"class": "Room",
+"language": "GDScript",
+"path": "res://assets/scripts/dream/room.gd"
+}, {
+"base": "Node",
+"class": "RoomLibrary",
+"language": "GDScript",
+"path": "res://assets/scripts/dream/room_library.gd"
 } ]
 _global_script_class_icons={
 "CombatGrid": "",
 "CombatGridCell": "",
-"Interactable_Object": ""
+"Importer": "",
+"Interactable_Object": "",
+"Room": "",
+"RoomLibrary": ""
 }
 
 [application]

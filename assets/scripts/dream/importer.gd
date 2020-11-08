@@ -1,6 +1,7 @@
 extends Node2D
+class_name Importer
 
-func import_scene(path, import_position, import_air):
+func import_scene(path, import_position, import_air, modifications = []):
 	var scene_to_import = load(path)
 	var scene_instance = scene_to_import.instance()
 	# Add scene as child of importer in order to have its nodes and cells copied
@@ -8,6 +9,9 @@ func import_scene(path, import_position, import_air):
 	var instance_root = $"ImportRoot"
 	var instance_offset = ($"ImportRoot/EntryPoint").position
 	instance_root.position -= import_position + instance_offset
+	# Make specified modifications
+	if modifications.size() > 0:
+		$"ImportRoot/TerrainTilemap".set_cellv(modifications[0].positions[0], modifications[0].ids[0])
 	merge_tilemap($"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
 	# Copy remaining child nodes. These are objects of the room.
 	for obj in instance_root.get_children():
@@ -27,7 +31,7 @@ func merge_tilemap(new_tilemap: TileMap, offset, import_position, import_air):
 			new_tilemap_size.x = cell.x
 		if cell.y > new_tilemap_size.y:
 			new_tilemap_size.y = cell.y
-	print(str(new_tilemap_size))
+	#print(str(new_tilemap_size))
 	var main_tilemap: TileMap = get_parent().get_node("TerrainTileMap")
 	var tile_offset = Vector2(offset.x /8, offset.y /8)
 	for i in range(new_tilemap_size.x+1):

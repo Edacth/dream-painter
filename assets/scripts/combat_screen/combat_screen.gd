@@ -18,8 +18,10 @@ func connect_energy_label():
 	
 	
 func connect_enemy_health_label():
-	$VBoxContainer/BottomPanel/CombatGrid.enemy_health_label = $VBoxContainer/TopPanel/EnemyHealth
+	$EnemyAI.health_label = $VBoxContainer/TopPanel/EnemyHealth
 	$VBoxContainer/TopPanel/EnemyHealth.text = "Health " + str($EnemyAI.health)
+	$VBoxContainer/BottomPanel/CombatGrid.enemy_take_damage_func = funcref($EnemyAI, "take_damage")
+	
 	
 func connect_player_health_label():
 	$VBoxContainer/BottomPanel/CombatGrid.player_health_label = $VBoxContainer/BottomPanel/PlayerHealth
@@ -36,7 +38,7 @@ func end_enemy_turn():
 	if current_turn == "enemy":
 		current_turn = "player"
 		$VBoxContainer/BottomPanel/CombatGrid.energy = 3
-		$VBoxContainer/BottomPanel/CombatGrid.energy_label.text = str(3)
+		$VBoxContainer/BottomPanel/CombatGrid.energy_label.text = "Energy\n" + str(3)
 
 func connect_enemy_ai():
 	$EnemyAI.combat_grid = $VBoxContainer/BottomPanel/CombatGrid

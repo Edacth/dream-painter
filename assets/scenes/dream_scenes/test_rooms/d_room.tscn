@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/test.tres" type="TileSet" id=1]
+
+[node name="ImportRoot" type="Node2D"]
+
+[node name="TerrainTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 2, 0, 0, 4, 0, 0, 6, 0, 0, 8, 0, 0, 10, 0, 0, 12, 0, 0, 131072, 0, 0, 131084, 0, 0, 262144, 0, 0, 262156, 0, 0, 393216, 0, 0, 393228, 0, 0, 524288, 0, 0, 524300, 0, 0, 655360, 0, 0, 655372, 0, 0, 786432, 0, 0, 786434, 0, 0, 786436, 0, 0, 786440, 0, 0, 786442, 0, 0, 786444, 0, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EntryPoint" type="Position2D" parent="."]
+position = Vector2( 56, 56 )

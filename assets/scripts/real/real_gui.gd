@@ -35,4 +35,5 @@ func connect_bedroom():
 	var _err = $Bedroom/Panel/DreamButton.connect("button_up", self, "relay_dream_button_up")
 
 func relay_dream_button_up():
-	dream_button_up_func.call_func()
+	if is_instance_valid(dream_button_up_func) && dream_button_up_func.is_valid():
+		dream_button_up_func.call_func()

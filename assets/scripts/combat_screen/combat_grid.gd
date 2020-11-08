@@ -15,7 +15,7 @@ onready var energy: int = 3
 onready var health = 15
 var energy_label
 var player_health_label
-var enemy_health_label
+var enemy_take_damage_func
 
 func _ready():
 	create_cells(grid_size)
@@ -145,7 +145,12 @@ func process_board_damage():
 			else:
 				enemy_damage += 1
 	print("The player dealt " + str(player_damage) + " damage")
+	if is_instance_valid(enemy_take_damage_func) && enemy_take_damage_func.is_valid():
+		enemy_take_damage_func.call_func(player_damage)
 	print("The enemy dealt " + str(enemy_damage) + " damage")
+	health -= enemy_damage
+	player_health_label.text = "Health " + str(health)
+	
 	
 func clear_temp_cells():
 	for id in range(0, grid_size.x * grid_size.y):
@@ -162,4 +167,4 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT && event.pressed && cursored_cell != -1 && energy > 0 && can_shape_fit(selected_shape, cursored_cell, "player"):
 			place_shape(selected_shape, cursored_cell, "player")
 			energy -= 1
-			energy_label.text = str(energy)
+			energy_label.text = "Energy\n" + str(energy)
