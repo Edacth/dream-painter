@@ -7,18 +7,29 @@ func _ready() -> void:
 	read_rooms()
 
 func read_rooms() -> void:
-	var door_close_method = Room.DoorCloseMethod.new("left", [Vector2(0, 6)], [0])
-	var new_room: Room = Room.new("udlr", ["up_door", "down_door", "left_door", "right_door"], "res://assets/scenes/dream_scenes/test_rooms/udlr_room.tscn",
-		[door_close_method])
-	rooms.append(new_room)
-
-# Decided this approach wasn't a good idea. May rewrite if I do file reading
-#func read_room() -> Room:
-#	var scene: PackedScene = load("res://assets/scenes/dream_scenes/test_rooms/udlr_room.tscn")
-#	var new_room
-#	var instance = scene.instance()
-#	print(instance.room_name)
-#	return new_room
+	var file = File.new()
+	
+	file.open("res://rooms.json", File.READ)
+	var json = JSON.parse(file.get_as_text())
+	var result = json.result
+	# Make sure json is okay
+	if json.error == OK && typeof(result) == TYPE_DICTIONARY:
+		for r in result["rooms"]:
+			# Parse door close methods
+			var door_close_methods: Array = []
+			for m in r["door_close_methods"]:
+				var positions: Array = []
+				for position in m["positions"]:
+					positions.append(Vector2(position[0], position[1]))
+				var ids: Array = []
+				for id in m["ids"]:
+					ids.append(id)
+				var new_method = Room.DoorCloseMethod.new(m["door"], positions, ids)
+				door_close_methods.append(new_method)
+			# Create room and append it
+			var new_room: Room = Room.new(r["room_name"], r["flags"], r["scene_path"], door_close_methods)
+			rooms.append(new_room)
+	
 
 func get_rooms_with_flags(required_flags: PoolStringArray) -> Array:
 	var valid_rooms: Array = []

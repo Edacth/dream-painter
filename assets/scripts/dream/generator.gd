@@ -45,10 +45,34 @@ func run_random_walk(start_point: Vector2, length: int) -> Array:
 
 func generate_visualization(layout):
 	for room in layout:
+		# TODO: Choose from the valid rooms randomly
+		# TODO: Properly apply the modifications based on the flags
 		var valid_rooms: Array = room_library.get_rooms_with_flags(room.flags)
 		var modifications = []
+		# Up door modification
+		if !(room.has_flag("up_door")):
+			for mod in valid_rooms[0].door_close_methods:
+				if mod.door == "up":
+					modifications.append(mod)
+					break
+		# Down door modification
+		if !(room.has_flag("down_door")):
+			for mod in valid_rooms[0].door_close_methods:
+				if mod.door == "down":
+					modifications.append(mod)
+					break
+		# Left door modification
 		if !(room.has_flag("left_door")):
-			modifications.append(valid_rooms[0].door_close_methods[0])
+			for mod in valid_rooms[0].door_close_methods:
+				if mod.door == "left":
+					modifications.append(mod)
+					break
+		# Right door modification
+		if !(room.has_flag("right_door")):
+			for mod in valid_rooms[0].door_close_methods:
+				if mod.door == "right":
+					modifications.append(mod)
+					break
 		
 		importer.import_scene(valid_rooms[0].scene_path, room.pos * ROOM_SIZE, false, modifications)
 
@@ -80,6 +104,12 @@ func calc_door_flags(room: LayoutRoom) -> Array:
 	for i in level_layout:
 		if i.pos == adjactent:
 			flags.append("left_door")
+			
+	# left_door flag
+	adjactent = room.pos + Dir2Vec.dic[Dir2Vec.Dir.RIGHT]
+	for i in level_layout:
+		if i.pos == adjactent:
+			flags.append("right_door")
 	return flags
 	
 func check_duplicates(a):

@@ -1,0 +1,31 @@
+{
+    "rooms": [
+        {
+            "room_name": "udlr",
+            "flags": ["up_door", "down_door", "left_door", "right_door"],
+            "scene_path": "res://assets/scenes/dream_scenes/test_rooms/udlr_room.tscn",
+            "door_close_methods": [
+                {
+                    "door": "up",
+                    "positions": [[6, 0]],
+                    "ids": [0]
+                },
+                {
+                    "door": "down",
+                    "positions": [[6, 12]],
+                    "ids": [0]
+                },
+                {
+                    "door": "left",
+                    "positions": [[0, 6]],
+                    "ids": [0]
+                },
+                {
+                    "door": "right",
+                    "positions": [[12, 6]],
+                    "ids": [0]
+                }
+            ]
+        }
+    ]
+}

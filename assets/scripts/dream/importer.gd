@@ -10,8 +10,9 @@ func import_scene(path, import_position, import_air, modifications = []):
 	var instance_offset = ($"ImportRoot/EntryPoint").position
 	instance_root.position -= import_position + instance_offset
 	# Make specified modifications
-	if modifications.size() > 0:
-		$"ImportRoot/TerrainTilemap".set_cellv(modifications[0].positions[0], modifications[0].ids[0])
+	for mod in modifications:
+		for i in mod.positions.size():
+			$"ImportRoot/TerrainTilemap".set_cellv(mod.positions[i], mod.ids[i])
 	merge_tilemap($"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
 	# Copy remaining child nodes. These are objects of the room.
 	for obj in instance_root.get_children():
