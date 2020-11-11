@@ -26,6 +26,33 @@
                     "ids": [0]
                 }
             ]
+        },
+        {
+            "room_name": "red_room",
+            "flags": ["up_door", "down_door", "left_door", "right_door"],
+            "scene_path": "res://assets/scenes/dream_scenes/test_rooms/blue_room.tscn",
+            "door_close_methods": [
+                {
+                    "door": "up",
+                    "positions": [[6, 0]],
+                    "ids": [5]
+                },
+                {
+                    "door": "down",
+                    "positions": [[6, 12]],
+                    "ids": [5]
+                },
+                {
+                    "door": "left",
+                    "positions": [[0, 6]],
+                    "ids": [5]
+                },
+                {
+                    "door": "right",
+                    "positions": [[12, 6]],
+                    "ids": [5]
+                }
+            ]
         }
     ]
 }

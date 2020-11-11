@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/test.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/scenes/dream_scenes/kinship.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/dream_scenes/shadow_man.tscn" type="PackedScene" id=3]
+
+[node name="ImportRoot" type="Node2D"]
+
+[node name="TerrainTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 5, 0, 2, 5, 0, 4, 5, 0, 8, 5, 0, 10, 5, 0, 12, 5, 0, 131072, 5, 0, 131084, 5, 0, 262144, 5, 0, 262156, 5, 0, 524288, 5, 0, 524300, 5, 0, 655360, 5, 0, 655372, 5, 0, 786432, 5, 0, 786434, 5, 0, 786436, 5, 0, 786440, 5, 0, 786442, 5, 0, 786444, 5, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EntryPoint" type="Position2D" parent="."]
+position = Vector2( 56, 56 )
+
+[node name="Kinship" parent="." instance=ExtResource( 2 )]
+position = Vector2( 20, 20 )
+
+[node name="ShadowMan" parent="." instance=ExtResource( 3 )]
+position = Vector2( 56, 56 )

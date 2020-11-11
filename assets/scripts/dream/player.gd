@@ -39,7 +39,7 @@ func start_move():
 
 func end_move():
 	get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME, "interactable_object", "reset_highlight")
-	nearest_interactable_object = get_nearest_interactable_object()
+	nearest_interactable_object = get_interact_objects_in_range()
 	if is_instance_valid(nearest_interactable_object): nearest_interactable_object.highlight()
 	#print("end move")
 
@@ -82,3 +82,9 @@ func get_nearest_interactable_object():
 			nearest_object = obj
 	return nearest_object
 	
+func get_interact_objects_in_range():
+	var interactable_objects = get_tree().get_nodes_in_group("interactable_object")
+	for obj in interactable_objects:
+		if obj.within_range_of_player == true:
+			return obj
+	return null
