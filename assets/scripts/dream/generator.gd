@@ -1,4 +1,7 @@
 extends Node2D
+
+signal generation_finished
+
 var importer : Importer
 var room_library: RoomLibrary
 
@@ -26,6 +29,7 @@ func on_values_assigned():
 	for room in level_layout:
 		room.flags = calc_door_flags(room)
 	generate_visualization(level_layout)
+	emit_signal("generation_finished")
 
 func generate_layout() -> void:
 	for i in range(0, 2):

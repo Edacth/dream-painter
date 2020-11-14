@@ -3,6 +3,7 @@ extends Control
 var current_turn: String
 
 func _ready():
+	print("COMBAT READY")
 	$VBoxContainer/BottomPanel/ShapeBar.shape_select_response = funcref($VBoxContainer/BottomPanel/CombatGrid, "change_shape")
 	connect_energy_label()
 	connect_enemy_ai()
@@ -11,6 +12,16 @@ func _ready():
 	current_turn = "enemy"
 	$VBoxContainer/BottomPanel/EnergyBar/EndTurnButton.on_press_response = funcref(self, "end_player_turn")
 	$EnemyAI.start_turn()
+
+
+func setup(enemy_name, enemy_health):
+	$VBoxContainer/TopPanel/EnemyName.text = enemy_name
+	$EnemyAI.set_health(enemy_health)
+
+
+func end_combat():
+	pass
+
 
 func connect_energy_label():
 	$VBoxContainer/BottomPanel/CombatGrid.energy_label = $VBoxContainer/BottomPanel/EnergyBar/EnergyLabel
@@ -26,6 +37,7 @@ func connect_enemy_health_label():
 func connect_player_health_label():
 	$VBoxContainer/BottomPanel/CombatGrid.player_health_label = $VBoxContainer/BottomPanel/PlayerHealth
 	$VBoxContainer/BottomPanel/PlayerHealth.text = "Health " + str($VBoxContainer/BottomPanel/CombatGrid.health)
+
 
 func end_player_turn():
 	if current_turn == "player":

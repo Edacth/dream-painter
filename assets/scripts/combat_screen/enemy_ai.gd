@@ -26,3 +26,8 @@ func place_attack():
 func take_damage(amount):
 	health -= amount
 	health_label.text = "Health " + str(health)
+
+func set_health(amount):
+	health = amount
+	health_label.text = "Health " + str(health)
+	

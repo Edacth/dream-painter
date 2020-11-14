@@ -37,6 +37,7 @@ font_data = ExtResource( 3 )
 [node name="CombatScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 1024, 600 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -58,7 +59,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 custom_styles/panel = SubResource( 1 )
 
-[node name="Label" type="Label" parent="VBoxContainer/TopPanel"]
+[node name="EnemyName" type="Label" parent="VBoxContainer/TopPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
