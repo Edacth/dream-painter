@@ -32,7 +32,7 @@ func on_values_assigned():
 	emit_signal("generation_finished")
 
 func generate_layout() -> void:
-	for i in range(0, 2):
+	for _i in range(0, 2):
 		var path = run_random_walk(Vector2(0,0), 3)
 		for p_room in path:
 			var found: bool = false
@@ -116,7 +116,6 @@ func calc_door_flags(room: LayoutRoom) -> Array:
 	
 func check_duplicates(a):
 	var is_dupe = false
-	var found_dupe = false 
 
 	for i in range(a.size()):
 		if is_dupe == true:
@@ -124,6 +123,5 @@ func check_duplicates(a):
 		for j in range(a.size()):
 			if a[j] == a[i] && i != j:
 				is_dupe = true
-				found_dupe = true
 				print("duplicate")
 				break

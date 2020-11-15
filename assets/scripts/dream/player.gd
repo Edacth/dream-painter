@@ -13,6 +13,8 @@ onready var kinematicBody: KinematicBody2D = get_node("KinematicBody2D")
 var nearest_interactable_object: Interactable_Object = null
 onready var interact_distance = 13
 var move_state = STILL
+var queue_nearest_object_check: bool = false
+var nearest_object_check_ticks: int = -1
 
 func _ready():
 	pass # Replace with function body. 
@@ -62,6 +64,11 @@ func _physics_process(delta):
 		if is_equal_approx(move_progress, 1):
 			move_state = STILL
 			end_move()
+	
+	if nearest_object_check_ticks == 0:
+		nearest_interactable_object = get_interact_objects_in_range()
+	if nearest_object_check_ticks > -1:
+		nearest_object_check_ticks -= 1
 
 func printTile():
 	var map_coords = terrain_map.world_to_map(position)
@@ -85,6 +92,10 @@ func get_nearest_interactable_object():
 func get_interact_objects_in_range():
 	var interactable_objects = get_tree().get_nodes_in_group("interactable_object")
 	for obj in interactable_objects:
+		var test = obj.get_node("InteractBox").get_overlapping_bodies()
 		if obj.within_range_of_player == true:
 			return obj
 	return null
+
+func queue_nearest_object_check():
+	nearest_object_check_ticks = 1

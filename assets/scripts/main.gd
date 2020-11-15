@@ -16,6 +16,7 @@ func _ready():
 	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_pickup_signals")
 	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_npc_signals")
 	$RealWorld/RealGUI.dream_button_up_func = funcref(self, "enter_dream")
+	$CombatScreen.switch_root_func = funcref(self, "return_from_combat")
 	connect_inv_gui_signals()
 	switch_scene_root(state)
 	
@@ -47,18 +48,25 @@ func switch_scene_root(to_state):
 	for root in roots_to_remove:
 		if root.get_parent() != null:
 			self.remove_child(root)
-		
+
+func connect_dungeon_signals():
+	connect_pickup_signals()
+	connect_pickup_signals()
+
 func connect_pickup_signals():
 	var dream_root_children = dream_root.get_children()
 	for obj in dream_root_children:
 		if obj.is_in_group("pickup"):
-			obj.connect("picked_up", self, "process_pickup")
+			if !obj.is_connected("picked_up", self, "process_pickup"):
+				obj.connect("picked_up", self, "process_pickup")
 
 func connect_npc_signals():
 	var dream_root_children = dream_root.get_children()
 	for obj in dream_root_children:
 		if obj.is_in_group("npc"):
-			obj.connect("combat_started", self, "start_combat")
+			if !obj.is_connected("combat_started", self, "start_combat"):
+				obj.connect("combat_started", self, "start_combat")
+				obj.reconnect_dungeon_func = funcref(self, "connect_dungeon_signals")
 
 func process_pickup(item_id):
 	$Inventory.add_item(item_id, 1)
@@ -71,6 +79,11 @@ func enter_dream():
 	dream_root.generate_world()
 	switch_scene_root("dream")
 
-func start_combat(enemy_name, enemy_health):
-	combat_root.setup(enemy_name, enemy_health)
+func start_combat(enemy_name, enemy_health, on_defeat_func):
+	combat_root.setup(enemy_name, enemy_health, on_defeat_func)
 	switch_scene_root("combat")
+
+func return_from_combat():
+	switch_scene_root("dream")
+	#dream_root.get_node("Player").nearest_interactable_object = dream_root.get_node("Player").get_interact_objects_in_range()
+	dream_root.get_node("Player").queue_nearest_object_check()

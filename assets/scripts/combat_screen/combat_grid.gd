@@ -16,6 +16,7 @@ onready var health = 15
 var energy_label
 var player_health_label
 var enemy_take_damage_func
+var player_defeat_func
 
 func _ready():
 	create_cells(grid_size)
@@ -34,18 +35,22 @@ func create_cells(size: Vector2):
 		new_cell.enemy_type = -1
 		grid.add_child(new_cell)
 
+
 func resize_cursor_cell():
 	#var cell_size = $GridContainer.get_child(0).rect_size
 	$CursorCell.rect_size.x = $GridContainer.rect_size.x / grid_size.x
 	$CursorCell.rect_size.y = $GridContainer.rect_size.y / grid_size.y
 
+
 func set_cursor_cell(id: int):
 	cursored_cell = id
 	get_node("GridContainer/GridCell" + str(cursored_cell) + "/Cursor").texture = cursored_cell_texture
 
+
 func clear_cursor_cell(id: int):
 	cursored_cell = -1
 	get_node("GridContainer/GridCell" + str(id) + "/Cursor").texture = null
+
 
 func place_shape(shape_name: String, placement_id: int, user: String):
 	var shape: ShapeLibrary.CellShape
@@ -59,6 +64,7 @@ func place_shape(shape_name: String, placement_id: int, user: String):
 		var place_position = get_relative_cell_id(placement_id, cell.position)
 		if place_position != -1:
 			place_cell(cell.type, place_position, user)
+
 
 func place_cell(type: int, id, user: String):
 	if !(id < 0 || id >= grid_size.x * grid_size.y):
@@ -79,6 +85,7 @@ func place_cell(type: int, id, user: String):
 				cell.get_node("Enemy_Layer").modulate = Color(1, 0, 0)
 				cell.enemy_type = type
 
+
 func get_relative_cell_id(start_id: int, offset: Vector2) -> int:
 	var relative_cell_id: int = start_id
 	# Prevent horizontal overflow
@@ -92,10 +99,11 @@ func get_relative_cell_id(start_id: int, offset: Vector2) -> int:
 		return relative_cell_id
 	# Not a valid cell
 	return -1
-	
+
+
 func change_shape(new_shape: String):
 	selected_shape = new_shape
-	print(selected_shape)
+
 
 func can_shape_fit(shape_to_fit: String, placement_id: int, user: String) -> bool:
 	# Accomodate for both player and enemy shapes
@@ -161,6 +169,16 @@ func clear_temp_cells():
 		grid_cell.get_node("Enemy_Layer").texture = null
 		grid_cell.enemy_type = -1
 			
+
+
+func clear_all_cells():
+	for id in range(0, grid_size.x * grid_size.y):
+		var grid_cell = get_node("GridContainer/GridCell" + str(id))
+		grid_cell.get_node("Player_Layer").texture = null
+		grid_cell.type = -1
+		grid_cell.get_node("Enemy_Layer").texture = null
+		grid_cell.enemy_type = -1
+
 
 func _input(event):
 	if event is InputEventMouseButton:
