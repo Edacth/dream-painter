@@ -15,9 +15,8 @@ func _ready():
 	$VBoxContainer/BottomPanel/EnergyBar/EndTurnButton.on_press_response = funcref(self, "end_player_turn")
 
 
-func setup(enemy_name, enemy_health, enemy_defeat_func):
-	$VBoxContainer/TopPanel/EnemyName.text = enemy_name
-	$EnemyAI.set_health(enemy_health)
+func setup(enemy_type, enemy_defeat_func):
+	$EnemyAI.setup_enemy(enemy_type)
 	dream_scene_enemy_defeat_func = enemy_defeat_func
 	current_turn = "enemy"
 	enemy_defeated = false
@@ -42,7 +41,6 @@ func connect_energy_label():
 	
 func connect_enemy_health_label():
 	$EnemyAI.health_label = $VBoxContainer/TopPanel/EnemyHealth
-	$VBoxContainer/TopPanel/EnemyHealth.text = "Health " + str($EnemyAI.health)
 	$VBoxContainer/BottomPanel/CombatGrid.enemy_take_damage_func = funcref($EnemyAI, "take_damage")
 	
 	
@@ -71,6 +69,7 @@ func connect_enemy_ai():
 	$EnemyAI.combat_grid = $VBoxContainer/BottomPanel/CombatGrid
 	$EnemyAI.end_turn_repsonse = funcref(self, "end_enemy_turn")
 	$EnemyAI.defeat_func = funcref(self, "on_enemy_defeat")
+	$EnemyAI.name_label = $VBoxContainer/TopPanel/EnemyName
 
 func _input(event):
 	if event.is_action_pressed("test"):

@@ -10,7 +10,7 @@ func _ready():
 	real_root = $RealWorld
 	dream_root = $DreamWorld
 	combat_root = $CombatScreen
-	$DreamWorld/Player.terrain_map = $DreamWorld/TerrainTileMap
+	$DreamWorld/Player.terrain_map = $DreamWorld/TerrainTilemap
 	var _err = $RealWorld/RealGUI/Debug/Panel/SwitchButton.connect("button_down", self, "enter_dream")
 	_err = $DreamWorld/DreamGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_scene_root", ["real"])
 	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_pickup_signals")
@@ -79,8 +79,8 @@ func enter_dream():
 	dream_root.generate_world()
 	switch_scene_root("dream")
 
-func start_combat(enemy_name, enemy_health, on_defeat_func):
-	combat_root.setup(enemy_name, enemy_health, on_defeat_func)
+func start_combat(enemy_type, on_defeat_func):
+	combat_root.setup(enemy_type, on_defeat_func)
 	switch_scene_root("combat")
 
 func return_from_combat():

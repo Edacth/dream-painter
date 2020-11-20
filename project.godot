@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "CombatGrid",
 "language": "GDScript",
-"path": "res://assets/scripts/combat_screen/combat_grid.gd"
+"path": "res://assets/scripts/combat/combat_grid.gd"
 }, {
 "base": "Control",
 "class": "CombatGridCell",
 "language": "GDScript",
-"path": "res://assets/scripts/combat_screen/combat_grid_cell.gd"
+"path": "res://assets/scripts/combat/combat_grid_cell.gd"
+}, {
+"base": "Reference",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://assets/scripts/combat/enemies/enemy.gd"
 }, {
 "base": "Node2D",
 "class": "Importer",
@@ -42,6 +47,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CombatGrid": "",
 "CombatGridCell": "",
+"Enemy": "",
 "Importer": "",
 "Interactable_Object": "",
 "Room": "",
@@ -59,6 +65,10 @@ config/icon="res://icon.png"
 Dir2Vec="*res://assets/scripts/autoload/dir2Vec.gd"
 ColorCaster="*res://assets/scripts/autoload/color_caster.gd"
 ShapeLibrary="*res://assets/scripts/autoload/shape_library.gd"
+
+[global]
+
+pixel=false
 
 [input]
 
@@ -115,4 +125,5 @@ test1={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"

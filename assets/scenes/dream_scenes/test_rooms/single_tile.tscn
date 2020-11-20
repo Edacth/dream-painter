@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/test.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tilemaps/test.tres" type="TileSet" id=1]
+
 
 [node name="ImportRoot" type="Node2D"]
 
@@ -9,9 +10,9 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
+tile_data = PoolIntArray( 0, 4, 0 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="EntryPoint" type="Position2D" parent="."]
-position = Vector2( 56, -8 )

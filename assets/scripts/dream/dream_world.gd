@@ -1,10 +1,10 @@
 extends Node2D
 
-
-
 func _ready():
 	$Generator.importer = $Importer
 	$Generator.room_library = $RoomLibrary
+	$Importer.main_terrain_tilemap = $TerrainTilemap
+	$Importer.main_background_tilemap = $BackgroundTilemap
 	
 
 func generate_world():

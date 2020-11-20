@@ -386,3 +386,6 @@ gcov.css
 
 # https://clangd.llvm.org/ cache folder
 .clangd/
+
+# Exlude builds
+builds/

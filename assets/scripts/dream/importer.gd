@@ -1,6 +1,9 @@
 extends Node2D
 class_name Importer
 
+var main_terrain_tilemap: TileMap
+var main_background_tilemap: TileMap
+
 func import_scene(path, import_position, import_air, modifications = []):
 	var scene_to_import = load(path)
 	var scene_instance = scene_to_import.instance()
@@ -13,7 +16,12 @@ func import_scene(path, import_position, import_air, modifications = []):
 	for mod in modifications:
 		for i in mod.positions.size():
 			$"ImportRoot/TerrainTilemap".set_cellv(mod.positions[i], mod.ids[i])
-	merge_tilemap($"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
+	merge_tilemap(main_terrain_tilemap, $"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
+	var test = get_node("ImportRoot").get_children()
+	if get_node_or_null("ImportRoot/BackgroundTilemap") != null:
+		merge_tilemap(main_background_tilemap, $"ImportRoot/BackgroundTilemap", instance_offset, import_position, import_air)
+	$"ImportRoot/EntryPoint".queue_free()
+	$"ImportRoot".remove_child($"ImportRoot/EntryPoint")
 	# Copy remaining child nodes. These are objects of the room.
 	for obj in instance_root.get_children():
 		var old_parent = obj.get_parent()
@@ -24,24 +32,23 @@ func import_scene(path, import_position, import_air, modifications = []):
 	instance_root.queue_free()
 	self.remove_child(instance_root)
 
-func merge_tilemap(new_tilemap: TileMap, offset, import_position, import_air):
-	var used_cells = new_tilemap.get_used_cells()
-	var new_tilemap_size = Vector2(0, 0)
+
+func merge_tilemap(to_tilemap: TileMap, from_tilemap: TileMap, offset, import_position, import_air):
+	var used_cells = from_tilemap.get_used_cells()
+	var from_tilemap_size = Vector2(0, 0)
 	for cell in used_cells:
-		if cell.x > new_tilemap_size.x:
-			new_tilemap_size.x = cell.x
-		if cell.y > new_tilemap_size.y:
-			new_tilemap_size.y = cell.y
-	#print(str(new_tilemap_size))
-	var main_tilemap: TileMap = get_parent().get_node("TerrainTileMap")
+		if cell.x > from_tilemap_size.x:
+			from_tilemap_size.x = cell.x
+		if cell.y > from_tilemap_size.y:
+			from_tilemap_size.y = cell.y
 	var tile_offset = Vector2(offset.x /8, offset.y /8)
-	for i in range(new_tilemap_size.x+1):
-		for j in range(new_tilemap_size.y+1):
-			var cell = new_tilemap.get_cell(i, j)
+	for i in range(from_tilemap_size.x+1):
+		for j in range(from_tilemap_size.y+1):
+			var cell = from_tilemap.get_cell(i, j)
+			var autotile_coord = from_tilemap.get_cell_autotile_coord(i, j)
 			if import_air == false and cell == -1:
 				continue
-			main_tilemap.set_cell(i - tile_offset.x + import_position.x, j - tile_offset.y + import_position.y, cell, false)
-	$"ImportRoot/TerrainTilemap".queue_free()
-	$"ImportRoot".remove_child($"ImportRoot/TerrainTilemap")
-	$"ImportRoot/EntryPoint".queue_free()
-	$"ImportRoot".remove_child($"ImportRoot/EntryPoint")
+			to_tilemap.set_cell(i - tile_offset.x + import_position.x, j - tile_offset.y + import_position.y, cell,
+				false, false, false, autotile_coord)
+	from_tilemap.queue_free()
+	$"ImportRoot".remove_child(from_tilemap)

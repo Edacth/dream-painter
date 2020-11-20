@@ -1,7 +1,7 @@
 extends Interactable_Object
 
 signal combat_started(enemy_name, enemy_health, on_defeat_func)
-var npc_name: String = "Toast"
+export var npc_type: String = ""
 var reconnect_dungeon_func: FuncRef
 
 func _init():
@@ -9,7 +9,7 @@ func _init():
 	add_to_group("npc", true)
 
 func interact():
-	emit_signal("combat_started", npc_name, 3, funcref(self, "on_defeat"))
+	emit_signal("combat_started", npc_type, funcref(self, "on_defeat"))
 
 func on_defeat():
 	var drop: Node = load("res://assets/scenes/dream_scenes/kinship.tscn").instance()

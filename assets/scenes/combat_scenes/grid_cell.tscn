@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/textures/combat_screen/open_cell.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/combat_screen/combat_grid_cell.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/combat/combat_grid_cell.gd" type="Script" id=2]
+
 
 [node name="GridCell" type="Control"]
 anchor_right = 1.0

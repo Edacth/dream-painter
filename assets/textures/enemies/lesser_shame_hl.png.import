@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shadow_man.png-84bc3a12c81bc255f28d3ae50df92edb.stex"
+path="res://.import/lesser_shame_hl.png-5718c230ba7b867ed316ef675c17808c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/enemies/shadow_man.png"
-dest_files=[ "res://.import/shadow_man.png-84bc3a12c81bc255f28d3ae50df92edb.stex" ]
+source_file="res://assets/textures/enemies/lesser_shame_hl.png"
+dest_files=[ "res://.import/lesser_shame_hl.png-5718c230ba7b867ed316ef675c17808c.stex" ]
 
 [params]
 
