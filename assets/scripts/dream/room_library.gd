@@ -18,13 +18,19 @@ func read_rooms() -> void:
 			# Parse door close methods
 			var door_close_methods: Array = []
 			for m in r["door_close_methods"]:
+				# Positions
 				var positions: Array = []
 				for position in m["positions"]:
 					positions.append(Vector2(position[0], position[1]))
+				# Ids
 				var ids: Array = []
+				var autotile_coords: Array = []
 				for id in m["ids"]:
 					ids.append(id)
-				var new_method = Room.DoorCloseMethod.new(m["door"], positions, ids)
+				# Autotile coords
+				for coord in m["autotile_coords"]:
+					autotile_coords.append(Vector2(coord[0], coord[1]))
+				var new_method = Room.DoorCloseMethod.new(m["door"], positions, ids, autotile_coords)
 				door_close_methods.append(new_method)
 			# Create room and append it
 			var new_room: Room = Room.new(r["room_name"], r["flags"], r["scene_path"], door_close_methods)

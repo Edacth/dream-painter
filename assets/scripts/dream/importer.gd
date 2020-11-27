@@ -15,7 +15,7 @@ func import_scene(path, import_position, import_air, modifications = []):
 	# Make specified modifications
 	for mod in modifications:
 		for i in mod.positions.size():
-			$"ImportRoot/TerrainTilemap".set_cellv(mod.positions[i], mod.ids[i])
+			$"ImportRoot/TerrainTilemap".set_cell(mod.positions[i].x, mod.positions[i].y, mod.ids[i], false, false, false, mod.autotile_coords[i])
 	merge_tilemap(main_terrain_tilemap, $"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
 	var test = get_node("ImportRoot").get_children()
 	if get_node_or_null("ImportRoot/BackgroundTilemap") != null:
@@ -46,9 +46,12 @@ func merge_tilemap(to_tilemap: TileMap, from_tilemap: TileMap, offset, import_po
 		for j in range(from_tilemap_size.y+1):
 			var cell = from_tilemap.get_cell(i, j)
 			var autotile_coord = from_tilemap.get_cell_autotile_coord(i, j)
+			var is_cell_x_flipped = from_tilemap.is_cell_x_flipped(i, j)
+			var is_cell_y_flipped = from_tilemap.is_cell_y_flipped(i, j)
+			var is_cell_transposed = from_tilemap.is_cell_transposed(i, j)
 			if import_air == false and cell == -1:
 				continue
 			to_tilemap.set_cell(i - tile_offset.x + import_position.x, j - tile_offset.y + import_position.y, cell,
-				false, false, false, autotile_coord)
+				is_cell_x_flipped, is_cell_y_flipped, is_cell_transposed, autotile_coord)
 	from_tilemap.queue_free()
 	$"ImportRoot".remove_child(from_tilemap)

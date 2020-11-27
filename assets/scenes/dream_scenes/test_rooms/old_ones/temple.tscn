@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/tilemaps/test.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tilemaps/bad_ones/test.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/scenes/dream_scenes/object.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scenes/dream_scenes/kinship.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scenes/dream_scenes/fear.tscn" type="PackedScene" id=4]
+
 
 
 [node name="ImportRoot" type="Node2D"]

@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/scenes/dream_gui.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/dream/dream_gui.gd" type="Script" id=2]
 [ext_resource path="res://assets/scripts/dream/importer.gd" type="Script" id=3]
 [ext_resource path="res://assets/scenes/dream_scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scripts/dream/dream_world.gd" type="Script" id=5]
-[ext_resource path="res://assets/tilemaps/test.tres" type="TileSet" id=6]
+[ext_resource path="res://assets/tilemaps/background_tilemap.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/scripts/dream/generator.gd" type="Script" id=7]
 [ext_resource path="res://assets/scripts/dream/room_library.gd" type="Script" id=8]
+[ext_resource path="res://assets/tilemaps/all_terrain_tilemap.tres" type="TileSet" id=9]
+[ext_resource path="res://assets/scripts/dream/dialog/dialog_manager.gd" type="Script" id=10]
 
 [node name="DreamWorld" type="Node2D"]
 script = ExtResource( 5 )
@@ -17,7 +19,7 @@ margin_left = -400.0
 margin_top = -400.0
 margin_right = 1200.0
 margin_bottom = 1200.0
-color = Color( 0.105882, 0.0941176, 0.0941176, 1 )
+color = Color( 0.0862745, 0.109804, 0.133333, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,7 +31,7 @@ cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
 
 [node name="TerrainTilemap" type="TileMap" parent="."]
-tile_set = ExtResource( 6 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
@@ -51,3 +53,6 @@ script = ExtResource( 7 )
 
 [node name="RoomLibrary" type="Node2D" parent="."]
 script = ExtResource( 8 )
+
+[node name="DialogManager" type="Node2D" parent="."]
+script = ExtResource( 10 )

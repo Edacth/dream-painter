@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/tilemaps/test.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tilemaps/bad_ones/test.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/scenes/dream_scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/background.tres" type="TileSet" id=3]
+
 
 
 

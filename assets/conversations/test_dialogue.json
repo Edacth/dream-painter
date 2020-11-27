@@ -1,0 +1,54 @@
+{
+  "passages": [
+    {
+      "text": "Hey, what are you doing here?\n\n[[I don't know where I am]]\n[[I go where I want]]\n\n{{requirements}}\n{{var1}}true{{/var1}}\n{{var2}}3{{/var2}}\n{{/requirements}}",
+      "links": [
+        {
+          "name": "I don't know where I am",
+          "link": "I don't know where I am",
+          "pid": "2"
+        },
+        {
+          "name": "I go where I want",
+          "link": "I go where I want",
+          "pid": "3"
+        }
+      ],
+      "props": {
+        "requirements": {
+          "var1": "true",
+          "var2": "3"
+        }
+      },
+      "name": "Start",
+      "pid": "1",
+      "position": {
+        "x": "859",
+        "y": "398"
+      }
+    },
+    {
+      "text": "Double-click this passage to edit it.",
+      "name": "I don't know where I am",
+      "pid": "2",
+      "position": {
+        "x": "768",
+        "y": "554"
+      }
+    },
+    {
+      "text": "Double-click this passage to edit it.",
+      "name": "I go where I want",
+      "pid": "3",
+      "position": {
+        "x": "949",
+        "y": "554"
+      }
+    }
+  ],
+  "name": "test_dialogue",
+  "startnode": "1",
+  "creator": "Twine",
+  "creator-version": "2.3.9",
+  "ifid": "4FC8B47D-CC2C-4C05-8925-F89C60D9BCBB"
+}

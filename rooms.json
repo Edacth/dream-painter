@@ -2,82 +2,125 @@
     "rooms": [
         {
             "room_name": "udlr",
-            "flags": ["up_door", "down_door", "left_door", "right_door"],
+            "flags": ["normal_room", "up_door", "down_door", "left_door", "right_door"],
             "scene_path": "res://assets/scenes/dream_scenes/test_rooms/udlr_room.tscn",
             "door_close_methods": [
                 {
                     "door": "up",
                     "positions": [[6, 0]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 },
                 {
                     "door": "down",
                     "positions": [[6, 12]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 },
                 {
                     "door": "left",
                     "positions": [[0, 6]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 },
                 {
                     "door": "right",
                     "positions": [[12, 6]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 }
             ]
         },
         {
-            "room_name": "red_room",
-            "flags": ["up_door", "down_door", "left_door", "right_door"],
+            "room_name": "blue_room",
+            "flags": ["normal_room", "up_door", "down_door", "left_door", "right_door"],
             "scene_path": "res://assets/scenes/dream_scenes/test_rooms/blue_room.tscn",
             "door_close_methods": [
                 {
                     "door": "up",
                     "positions": [[6, 0]],
-                    "ids": [5]
+                    "ids": [0],
+                    "autotile_coords": [[0, 2]]
                 },
                 {
                     "door": "down",
                     "positions": [[6, 12]],
-                    "ids": [5]
+                    "ids": [0],
+                    "autotile_coords": [[0, 2]]
                 },
                 {
                     "door": "left",
                     "positions": [[0, 6]],
-                    "ids": [5]
+                    "ids": [0],
+                    "autotile_coords": [[0, 2]]
                 },
                 {
                     "door": "right",
                     "positions": [[12, 6]],
-                    "ids": [5]
+                    "ids": [0],
+                    "autotile_coords": [[0, 2]]
                 }
             ]
         },
         {
             "room_name": "shame_room",
-            "flags": ["up_door", "down_door", "left_door", "right_door"],
+            "flags": ["normal_room", "up_door", "down_door", "left_door", "right_door"],
             "scene_path": "res://assets/scenes/dream_scenes/test_rooms/shame_room.tscn",
             "door_close_methods": [
                 {
                     "door": "up",
                     "positions": [[6, 0]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 },
                 {
                     "door": "down",
                     "positions": [[6, 12]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 },
                 {
                     "door": "left",
                     "positions": [[0, 6]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
                 },
                 {
                     "door": "right",
                     "positions": [[12, 6]],
-                    "ids": [0]
+                    "ids": [0],
+                    "autotile_coords": [[0, 0]]
+                }
+            ]
+        },
+        {
+            "room_name": "start_room",
+            "flags": ["start_room", "up_door", "down_door", "left_door", "right_door"],
+            "scene_path": "res://assets/scenes/dream_scenes/test_rooms/start_room.tscn",
+            "door_close_methods": [
+                {
+                    "door": "up",
+                    "positions": [[6, 0]],
+                    "ids": [0],
+                    "autotile_coords": [[0, 4]]
+                },
+                {
+                    "door": "down",
+                    "positions": [[6, 12]],
+                    "ids": [0],
+                    "autotile_coords": [[0, 4]]
+                },
+                {
+                    "door": "left",
+                    "positions": [[0, 6]],
+                    "ids": [0],
+                    "autotile_coords": [[0, 4]]
+                },
+                {
+                    "door": "right",
+                    "positions": [[12, 6]],
+                    "ids": [0],
+                    "autotile_coords": [[0, 4]]
                 }
             ]
         }

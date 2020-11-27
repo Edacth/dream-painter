@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/tilemaps/test.tres" type="TileSet" id=1]
-
+[ext_resource path="res://assets/tilemaps/all_terrain_tilemap.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/tilemaps/background_tilemap.tres" type="TileSet" id=2]
 
 [node name="ImportRoot" type="Node2D"]
+
+[node name="BackgroundTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+format = 1
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="TerrainTilemap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

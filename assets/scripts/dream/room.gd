@@ -5,11 +5,13 @@ class DoorCloseMethod:
 	var door: String
 	var positions: PoolVector2Array
 	var ids: PoolIntArray
+	var autotile_coords: PoolVector2Array
 	
-	func _init(_door: String, _positions: PoolVector2Array, _ids: PoolIntArray):
+	func _init(_door: String, _positions: PoolVector2Array, _ids: PoolIntArray, _autotile_coords: PoolVector2Array):
 		door = _door
 		positions = _positions
 		ids = _ids
+		autotile_coords = _autotile_coords
 
 var room_name: String
 var flags: PoolStringArray
