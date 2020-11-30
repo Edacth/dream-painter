@@ -15,12 +15,15 @@ onready var interact_distance = 13
 var move_state = STILL
 var queue_nearest_object_check: bool = false
 var nearest_object_check_ticks: int = -1
+var block_input: bool = false
 
 func _ready():
 	pass # Replace with function body. 
 	
 func _unhandled_input(event):
-	if event.is_action_pressed("test"):
+	if block_input:
+		return
+	if event.is_action_pressed("interact"):
 		attempt_interact()
 
 
@@ -47,14 +50,15 @@ func end_move():
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("left") && move_state == STILL:
-		try_move(Dir2Vec.Dir.LEFT)
-	if Input.is_action_pressed("right") && move_state == STILL:
-		try_move(Dir2Vec.Dir.RIGHT)
-	if Input.is_action_pressed("up") && move_state == STILL:
-		try_move(Dir2Vec.Dir.UP)
-	if Input.is_action_pressed("down") && move_state == STILL:
-		try_move(Dir2Vec.Dir.DOWN)
+	if !block_input:
+		if Input.is_action_pressed("left") && move_state == STILL:
+			try_move(Dir2Vec.Dir.LEFT)
+		if Input.is_action_pressed("right") && move_state == STILL:
+			try_move(Dir2Vec.Dir.RIGHT)
+		if Input.is_action_pressed("up") && move_state == STILL:
+			try_move(Dir2Vec.Dir.UP)
+		if Input.is_action_pressed("down") && move_state == STILL:
+			try_move(Dir2Vec.Dir.DOWN)
 
 	if move_state == MOVING:
 		move_progress += move_toward(0, 1, delta * move_speed)

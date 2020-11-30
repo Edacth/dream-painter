@@ -54,5 +54,8 @@ script = ExtResource( 7 )
 [node name="RoomLibrary" type="Node2D" parent="."]
 script = ExtResource( 8 )
 
-[node name="DialogManager" type="Node2D" parent="."]
+[node name="DialogManager" type="Control" parent="."]
 script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -9,3 +9,4 @@ var name: String
 var text: String
 var pid: int
 var links = []
+var tags : Array = []

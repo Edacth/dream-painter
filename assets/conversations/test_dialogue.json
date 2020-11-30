@@ -1,7 +1,7 @@
 {
   "passages": [
     {
-      "text": "Hey, what are you doing here?\n\n[[I don't know where I am]]\n[[I go where I want]]\n\n{{requirements}}\n{{var1}}true{{/var1}}\n{{var2}}3{{/var2}}\n{{/requirements}}",
+      "text": "Hey, what are you doing here?\n===\n\n[[I don't know where I am]]\n[[I go where I want]]\n\n{{requirements}}\n{{var1}}true{{/var1}}\n{{var2}}3{{/var2}}\n{{/requirements}}",
       "links": [
         {
           "name": "I don't know where I am",
@@ -23,26 +23,70 @@
       "name": "Start",
       "pid": "1",
       "position": {
-        "x": "859",
+        "x": "857",
         "y": "398"
-      }
+      },
+      "tags": [
+        "show_choice"
+      ]
     },
     {
-      "text": "Double-click this passage to edit it.",
+      "text": "Ah, that's well enough. You'll figure your way soon enough.",
       "name": "I don't know where I am",
       "pid": "2",
       "position": {
-        "x": "768",
+        "x": "765",
+        "y": "556"
+      }
+    },
+    {
+      "text": "Huh, well good luck then.\n===\n\n[[Loser]]",
+      "links": [
+        {
+          "name": "Loser",
+          "link": "Loser",
+          "pid": "6"
+        }
+      ],
+      "name": "I go where I want",
+      "pid": "3",
+      "position": {
+        "x": "950",
         "y": "554"
       }
     },
     {
-      "text": "Double-click this passage to edit it.",
-      "name": "I go where I want",
-      "pid": "3",
+      "text": "Double-click this passage to edit it.\n\n[[Test2]]",
+      "links": [
+        {
+          "name": "Test2",
+          "link": "Test2",
+          "pid": "5"
+        }
+      ],
+      "name": "Test1",
+      "pid": "4",
       "position": {
-        "x": "949",
-        "y": "554"
+        "x": "1294",
+        "y": "415.5"
+      }
+    },
+    {
+      "text": "Double-click this passage to edit it.",
+      "name": "Test2",
+      "pid": "5",
+      "position": {
+        "x": "1318",
+        "y": "571.5"
+      }
+    },
+    {
+      "text": "Loser",
+      "name": "Loser",
+      "pid": "6",
+      "position": {
+        "x": "968",
+        "y": "707.5"
       }
     }
   ],

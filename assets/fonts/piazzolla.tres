@@ -1,4 +1,4 @@
 [gd_resource type="DynamicFontData" format=2]
 
 [resource]
-font_path = "res://assets/fonts/Piazzolla-VariableFont_opsz,wght.ttf"
+font_path = "res://assets/fonts/Piazzolla-Medium-opsz=12.ttf"

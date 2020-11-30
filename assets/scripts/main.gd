@@ -77,6 +77,7 @@ func connect_inv_gui_signals():
 
 func enter_dream():
 	dream_root.generate_world()
+	dream_root.request_convo("test_dialogue")
 	switch_scene_root("dream")
 
 func start_combat(enemy_type, on_defeat_func):

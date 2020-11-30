@@ -15,5 +15,15 @@ func generate_world():
 	$Generator.on_values_assigned()
 
 func connect_dialog_manager():
-	$DialogManager.dialog_box = $DreamGUI/DialogBox/Panel/Panel/Label
-	$DialogManager.test()
+	$DialogManager.dream_gui = $DreamGUI
+	$DialogManager.dialog_box = $DreamGUI/DialogBox
+	$DialogManager.dialog_label = $DreamGUI/DialogBox/Panel/Panel/MainLabel
+	$DialogManager.choice_container = $DreamGUI/DialogBox/Panel/Panel/ChoiceContainer
+	$DialogManager.set_player_input_blockage_func = funcref(self, "set_player_input_blockage")
+
+func request_convo(convo_name: String):
+	$DialogManager.request_convo(convo_name)
+
+
+func set_player_input_blockage(value: bool):
+	$Player.block_input = value
