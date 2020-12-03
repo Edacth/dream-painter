@@ -13,8 +13,7 @@ func _ready():
 	$DreamWorld/Player.terrain_map = $DreamWorld/TerrainTilemap
 	var _err = $RealWorld/RealGUI/Debug/Panel/SwitchButton.connect("button_down", self, "enter_dream")
 	_err = $DreamWorld/DreamGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_scene_root", ["real"])
-	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_pickup_signals")
-	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_npc_signals")
+	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_dungeon_signals")
 	$RealWorld/RealGUI.dream_button_up_func = funcref(self, "enter_dream")
 	$CombatScreen.switch_root_func = funcref(self, "return_from_combat")
 	connect_inv_gui_signals()
@@ -51,7 +50,8 @@ func switch_scene_root(to_state):
 
 func connect_dungeon_signals():
 	connect_pickup_signals()
-	connect_pickup_signals()
+	connect_npc_signals()
+	connect_sign_signals()
 
 func connect_pickup_signals():
 	var dream_root_children = dream_root.get_children()
@@ -67,6 +67,14 @@ func connect_npc_signals():
 			if !obj.is_connected("combat_started", self, "start_combat"):
 				obj.connect("combat_started", self, "start_combat")
 				obj.reconnect_dungeon_func = funcref(self, "connect_dungeon_signals")
+
+
+func connect_sign_signals():
+	var dream_root_children = dream_root.get_children()
+	for obj in dream_root_children:
+		if obj.is_in_group("sign"):
+			if !obj.is_connected("sign_interacted", dream_root.get_node("DialogManager"), "request_runtime_message"):
+				obj.connect("sign_interacted", dream_root.get_node("DialogManager"), "request_runtime_message")
 
 func process_pickup(item_id):
 	$Inventory.add_item(item_id, 1)

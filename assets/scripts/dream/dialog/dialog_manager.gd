@@ -65,12 +65,25 @@ func read_conversations():
 
 
 func request_convo(convo_name: String):
-	dream_gui.add_child(dialog_box)
+	conversation_active = true
+	if dream_gui.get_node_or_null("DialogBox") == null:
+		dream_gui.add_child(dialog_box)
 	for convo in conversations:
 		if convo.name == convo_name:
 			active_convo = convo
 			break
 	display_passage(active_convo, active_convo.start_node)
+	set_player_input_blockage_func.call_func(true)
+
+
+func request_runtime_message(message: String):
+	conversation_active = true
+	dream_gui.add_child(dialog_box)
+	var custom_convo = Conversation.new()
+	custom_convo.passages.append(Passage.new())
+	custom_convo.start_node = 1
+	custom_convo.passages.append(Passage.new("Blah", message, 1, [], []))
+	display_passage(custom_convo, custom_convo.start_node)
 	set_player_input_blockage_func.call_func(true)
 
 
@@ -97,6 +110,7 @@ func set_up_choices(conversation, links: Array, make_visible: bool):
 
 
 func end_convo():
+	conversation_active = false
 	dream_gui.remove_child(dialog_box)
 	reset_choices()
 	selected_choice = -1
@@ -126,6 +140,7 @@ func reset_choices():
 
 
 func _input(event):
+	if !conversation_active: return
 	if event.is_action_pressed("interact"):
 		if active_choices.size() == 0:
 			end_convo()

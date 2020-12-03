@@ -13,7 +13,6 @@ onready var kinematicBody: KinematicBody2D = get_node("KinematicBody2D")
 var nearest_interactable_object: Interactable_Object = null
 onready var interact_distance = 13
 var move_state = STILL
-var queue_nearest_object_check: bool = false
 var nearest_object_check_ticks: int = -1
 var block_input: bool = false
 
@@ -96,7 +95,7 @@ func get_nearest_interactable_object():
 func get_interact_objects_in_range():
 	var interactable_objects = get_tree().get_nodes_in_group("interactable_object")
 	for obj in interactable_objects:
-		var test = obj.get_node("InteractBox").get_overlapping_bodies()
+		#var test = obj.get_node("InteractBox").get_overlapping_bodies()
 		if obj.within_range_of_player == true:
 			return obj
 	return null

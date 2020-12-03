@@ -17,7 +17,6 @@ func import_scene(path, import_position, import_air, modifications = []):
 		for i in mod.positions.size():
 			$"ImportRoot/TerrainTilemap".set_cell(mod.positions[i].x, mod.positions[i].y, mod.ids[i], false, false, false, mod.autotile_coords[i])
 	merge_tilemap(main_terrain_tilemap, $"ImportRoot/TerrainTilemap", instance_offset, import_position, import_air)
-	var test = get_node("ImportRoot").get_children()
 	if get_node_or_null("ImportRoot/BackgroundTilemap") != null:
 		merge_tilemap(main_background_tilemap, $"ImportRoot/BackgroundTilemap", instance_offset, import_position, import_air)
 	$"ImportRoot/EntryPoint".queue_free()
