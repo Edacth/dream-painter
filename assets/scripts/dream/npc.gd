@@ -1,4 +1,4 @@
-extends Interactable_Object
+extends InteractableObject
 
 signal combat_started(enemy_name, enemy_health, on_defeat_func)
 export var npc_type: String = ""

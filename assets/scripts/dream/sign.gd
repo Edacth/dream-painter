@@ -1,4 +1,6 @@
-extends Interactable_Object
+extends InteractableObject
+
+class_name InteractableSign
 
 signal sign_interacted(message)
 export var message: String = ""

@@ -35,9 +35,14 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/dream/importer.gd"
 }, {
 "base": "Node",
-"class": "Interactable_Object",
+"class": "InteractableObject",
 "language": "GDScript",
 "path": "res://assets/scripts/dream/interactable_object.gd"
+}, {
+"base": "InteractableObject",
+"class": "InteractableSign",
+"language": "GDScript",
+"path": "res://assets/scripts/dream/sign.gd"
 }, {
 "base": "Object",
 "class": "Passage",
@@ -60,7 +65,8 @@ _global_script_class_icons={
 "Conversation": "",
 "Enemy": "",
 "Importer": "",
-"Interactable_Object": "",
+"InteractableObject": "",
+"InteractableSign": "",
 "Passage": "",
 "Room": "",
 "RoomLibrary": ""

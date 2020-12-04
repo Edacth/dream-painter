@@ -10,7 +10,7 @@ var start_point
 var end_point
 onready var terrain_map : TileMap
 onready var kinematicBody: KinematicBody2D = get_node("KinematicBody2D")
-var nearest_interactable_object: Interactable_Object = null
+var nearest_interactable_object: InteractableObject = null
 onready var interact_distance = 13
 var move_state = STILL
 var nearest_object_check_ticks: int = -1

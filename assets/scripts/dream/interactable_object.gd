@@ -1,5 +1,5 @@
 extends Node
-class_name Interactable_Object
+class_name InteractableObject
 
 export(Texture) var texture
 export(Texture) var highlighted_texture

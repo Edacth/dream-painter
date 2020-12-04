@@ -1,4 +1,4 @@
-extends Interactable_Object
+extends InteractableObject
 
 signal picked_up
 

@@ -1,0 +1,51 @@
+{
+    "passages": [
+      {
+        "text": "Potatoes or Molasses===\n\n[[Potatoes]]\n[[Molasses]]",
+        "links": [
+          {
+            "name": "Potatoes",
+            "link": "Potatoes",
+            "pid": "2"
+          },
+          {
+            "name": "Molasses",
+            "link": "Molasses",
+            "pid": "3"
+          }
+        ],
+        "name": "Start",
+        "pid": "1",
+        "position": {
+          "x": "404",
+          "y": "170.5"
+        },
+        "tags": [
+          "show_choice"
+        ]
+      },
+      {
+        "text": "SPUD SPUD",
+        "name": "Potatoes",
+        "pid": "2",
+        "position": {
+          "x": "329",
+          "y": "320.5"
+        }
+      },
+      {
+        "text": "Hello I am a dentist and I am coming for your gums.",
+        "name": "Molasses",
+        "pid": "3",
+        "position": {
+          "x": "479",
+          "y": "320.5"
+        }
+      }
+    ],
+    "name": "potatoes_or_molasses",
+    "startnode": "1",
+    "creator": "Twine",
+    "creator-version": "2.3.9",
+    "ifid": "C2B3CD9A-926A-40F4-9C0F-73B52234A810"
+  }
