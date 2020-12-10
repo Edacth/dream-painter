@@ -10,6 +10,7 @@ onready var cursored_cell_texture = preload("res://assets/textures/combat_screen
 onready var e_attack_tex = preload("res://assets/textures/combat_screen/weapons/enemy_attack.png")
 export var grid_size: Vector2 = Vector2(7,7)
 var cursored_cell = -1
+var grid_cells = []
 var selected_shape: String
 onready var energy: int = 3
 onready var health = 15
@@ -17,10 +18,12 @@ var energy_label
 var player_health_label
 var enemy_take_damage_func
 var player_defeat_func
+var selected_tool: String
 
 func _ready():
 	create_cells(grid_size)
 	resize_cursor_cell()
+
 
 func create_cells(size: Vector2):
 	var grid = $GridContainer
@@ -34,6 +37,7 @@ func create_cells(size: Vector2):
 		new_cell.type = -1
 		new_cell.enemy_type = -1
 		grid.add_child(new_cell)
+		grid_cells.append(new_cell)
 
 
 func resize_cursor_cell():
@@ -41,15 +45,19 @@ func resize_cursor_cell():
 	$CursorCell.rect_size.x = $GridContainer.rect_size.x / grid_size.x
 	$CursorCell.rect_size.y = $GridContainer.rect_size.y / grid_size.y
 
-
 func set_cursor_cell(id: int):
 	cursored_cell = id
-	get_node("GridContainer/GridCell" + str(cursored_cell) + "/Cursor").texture = cursored_cell_texture
+	get_grid_cell(id).get_node("Cursor").texture = cursored_cell_texture
 
 
 func clear_cursor_cell(id: int):
 	cursored_cell = -1
-	get_node("GridContainer/GridCell" + str(id) + "/Cursor").texture = null
+	get_grid_cell(id).get_node("Cursor").texture = null
+
+
+func get_grid_cell(id: int):
+	if !(id < 0 || id >= grid_size.x * grid_size.y):
+		return grid_cells[id]
 
 
 func place_shape(shape_name: String, placement_id: int, user: String):
@@ -68,9 +76,12 @@ func place_shape(shape_name: String, placement_id: int, user: String):
 
 func place_cell(type: int, id, user: String):
 	if !(id < 0 || id >= grid_size.x * grid_size.y):
-		var cell = get_node("GridContainer/GridCell" + str(id))
+		var cell = get_grid_cell(id)
 		#var texture_rect_name = user.capitalize() + "_Layer"
 		match type:
+			ShapeLibrary.CellType.EMPTY:
+				cell.get_node("Player_Layer").texture = null
+				cell.type = type
 			ShapeLibrary.CellType.P_NEUTRAL:
 				cell.get_node("Player_Layer").texture = grey_tint
 				cell.type = type
@@ -102,7 +113,12 @@ func get_relative_cell_id(start_id: int, offset: Vector2) -> int:
 
 
 func change_shape(new_shape: String):
+	selected_tool = "place"
 	selected_shape = new_shape
+
+
+func select_break_tool():
+	selected_tool = "break"
 
 
 func can_shape_fit(shape_to_fit: String, placement_id: int, user: String) -> bool:
@@ -125,7 +141,7 @@ func can_shape_fit(shape_to_fit: String, placement_id: int, user: String) -> boo
 			break
 		
 		# Accomodate for both player and enemy shapes
-		var grid_cell = get_node("GridContainer/GridCell" + str(cell_position))
+		var grid_cell = get_grid_cell(cell_position)
 		if (user == "player"):
 			if (grid_cell.type != -1):
 				can_fit = false
@@ -134,11 +150,12 @@ func can_shape_fit(shape_to_fit: String, placement_id: int, user: String) -> boo
 				can_fit = false
 	return can_fit
 
+
 func process_board_damage():
 	var player_damage = 0
 	var enemy_damage = 0
 	for id in range(0, grid_size.x * grid_size.y):
-		var grid_cell = get_node("GridContainer/GridCell" + str(id))
+		var grid_cell = get_grid_cell(id)
 		if (grid_cell.type == ShapeLibrary.CellType.P_DAMAGE):
 			if (grid_cell.enemy_type == ShapeLibrary.CellType.E_DAMAGE):
 				player_damage += 0.5
@@ -162,7 +179,7 @@ func process_board_damage():
 	
 func clear_temp_cells():
 	for id in range(0, grid_size.x * grid_size.y):
-		var grid_cell = get_node("GridContainer/GridCell" + str(id))
+		var grid_cell = get_grid_cell(id)
 		if (grid_cell.type != ShapeLibrary.CellType.P_NEUTRAL):
 			grid_cell.get_node("Player_Layer").texture = null
 			grid_cell.type = -1
@@ -173,7 +190,7 @@ func clear_temp_cells():
 
 func clear_all_cells():
 	for id in range(0, grid_size.x * grid_size.y):
-		var grid_cell = get_node("GridContainer/GridCell" + str(id))
+		var grid_cell = get_grid_cell(id)
 		grid_cell.get_node("Player_Layer").texture = null
 		grid_cell.type = -1
 		grid_cell.get_node("Enemy_Layer").texture = null
@@ -182,7 +199,12 @@ func clear_all_cells():
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed && cursored_cell != -1 && energy > 0 && can_shape_fit(selected_shape, cursored_cell, "player"):
-			place_shape(selected_shape, cursored_cell, "player")
-			energy -= 1
-			energy_label.text = "Energy\n" + str(energy)
+		if event.button_index == BUTTON_LEFT && event.pressed && cursored_cell != -1:
+			if selected_tool == "place" && energy > 0 && can_shape_fit(selected_shape, cursored_cell, "player"):
+				place_shape(selected_shape, cursored_cell, "player")
+				energy -= 1
+				energy_label.text = "Energy " + str(energy)
+			elif selected_tool == "break" && energy > 0 &&  get_grid_cell(cursored_cell).type != ShapeLibrary.CellType.EMPTY:
+				place_cell(ShapeLibrary.CellType.EMPTY, cursored_cell, "player")
+				energy -= 1
+				energy_label.text = "Energy " + str(energy)

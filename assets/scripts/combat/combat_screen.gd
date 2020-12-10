@@ -12,7 +12,8 @@ func _ready():
 	connect_enemy_ai()
 	connect_enemy_health_label()
 	connect_player_health_label()
-	$VBoxContainer/BottomPanel/EnergyBar/EndTurnButton.on_press_response = funcref(self, "end_player_turn")
+	$VBoxContainer/BottomPanel/ToolBar/EndTurnButton.on_press_response = funcref(self, "end_player_turn")
+	$VBoxContainer/BottomPanel/ToolBar/BreakButton.connect("button_down", $VBoxContainer/BottomPanel/CombatGrid, "select_break_tool")
 
 
 func setup(enemy_type, enemy_defeat_func):
@@ -34,9 +35,10 @@ func on_enemy_defeat():
 	enemy_defeated = true
 	dream_scene_enemy_defeat_func.call_func()
 
+
 func connect_energy_label():
-	$VBoxContainer/BottomPanel/CombatGrid.energy_label = $VBoxContainer/BottomPanel/EnergyBar/EnergyLabel
-	$VBoxContainer/BottomPanel/EnergyBar/EnergyLabel.text = str($VBoxContainer/BottomPanel/CombatGrid.energy)
+	$VBoxContainer/BottomPanel/CombatGrid.energy_label = $VBoxContainer/BottomPanel/PlayerEnergy
+	$VBoxContainer/BottomPanel/PlayerEnergy.text = str($VBoxContainer/BottomPanel/CombatGrid.energy)
 	
 	
 func connect_enemy_health_label():
@@ -58,12 +60,14 @@ func end_player_turn():
 			$EnemyAI.start_turn()
 		else:
 			end_combat()
-		
+
+
 func end_enemy_turn():
 	if current_turn == "enemy":
 		current_turn = "player"
 		$VBoxContainer/BottomPanel/CombatGrid.energy = 3
-		$VBoxContainer/BottomPanel/CombatGrid.energy_label.text = "Energy\n" + str(3)
+		$VBoxContainer/BottomPanel/CombatGrid.energy_label.text = "Energy " + str(3)
+
 
 func connect_enemy_ai():
 	$EnemyAI.combat_grid = $VBoxContainer/BottomPanel/CombatGrid

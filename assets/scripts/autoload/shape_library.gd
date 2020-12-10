@@ -1,6 +1,7 @@
 extends Node
 
 enum CellType {
+	EMPTY = -1
 	P_NEUTRAL,
 	P_DAMAGE,
 	P_BLOCK,
