@@ -89,7 +89,9 @@ func enter_dream():
 	switch_scene_root("dream")
 
 func start_combat(enemy_type, on_defeat_func):
-	combat_root.setup(enemy_type, on_defeat_func)
+	var set_health_func = funcref(dream_root.get_node("Player"), "set_health")
+	var player_health = dream_root.get_node("Player").health
+	combat_root.setup(enemy_type, on_defeat_func, player_health, set_health_func)
 	switch_scene_root("combat")
 
 func return_from_combat():

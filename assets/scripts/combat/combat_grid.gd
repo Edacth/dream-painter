@@ -13,8 +13,8 @@ var cursored_cell = -1
 var grid_cells = []
 var selected_shape: String
 onready var energy: int = 3
-onready var health = 15
-var energy_label
+onready var health = 1
+var player_energy_label
 var player_health_label
 var enemy_take_damage_func
 var player_defeat_func
@@ -185,7 +185,6 @@ func clear_temp_cells():
 			grid_cell.type = -1
 		grid_cell.get_node("Enemy_Layer").texture = null
 		grid_cell.enemy_type = -1
-			
 
 
 func clear_all_cells():
@@ -203,8 +202,8 @@ func _input(event):
 			if selected_tool == "place" && energy > 0 && can_shape_fit(selected_shape, cursored_cell, "player"):
 				place_shape(selected_shape, cursored_cell, "player")
 				energy -= 1
-				energy_label.text = "Energy " + str(energy)
+				player_energy_label.text = "Energy " + str(energy)
 			elif selected_tool == "break" && energy > 0 &&  get_grid_cell(cursored_cell).type != ShapeLibrary.CellType.EMPTY:
 				place_cell(ShapeLibrary.CellType.EMPTY, cursored_cell, "player")
 				energy -= 1
-				energy_label.text = "Energy " + str(energy)
+				player_energy_label.text = "Energy " + str(energy)

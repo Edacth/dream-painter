@@ -12,7 +12,7 @@ func interact():
 	emit_signal("combat_started", npc_type, funcref(self, "on_defeat"))
 
 func on_defeat():
-	var drop: Node = load("res://assets/scenes/dream_scenes/kinship.tscn").instance()
+	var drop: Node = load("res://assets/scenes/dream_scenes/interactable_objects/kinship.tscn").instance()
 	get_parent().add_child(drop)
 	drop.position = self.position
 	if is_instance_valid(reconnect_dungeon_func) && reconnect_dungeon_func.is_valid():
