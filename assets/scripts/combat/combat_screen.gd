@@ -5,26 +5,26 @@ var current_turn: String
 var enemy_defeated: bool = false
 var switch_root_func: FuncRef
 var dream_scene_enemy_defeat_func: FuncRef
-#var dreamworld_player_node: Node
-var set_dw_player_node_health_func: FuncRef
+var player_defeat_func: FuncRef
+onready var defeat_panel_node = get_node("VBoxContainer/BottomPanel/CombatGrid/DefeatPanel") 
 
 
 func _ready():
 	print("COMBAT READY")
 	combat_grid_node = $VBoxContainer/BottomPanel/CombatGrid
+	combat_grid_node.get_player_health_func = funcref(self, "get_player_health")
+	combat_grid_node.set_player_health_func = funcref(self, "set_player_health")
 	$VBoxContainer/BottomPanel/ShapeBar.shape_select_response = funcref($VBoxContainer/BottomPanel/CombatGrid, "change_shape")
 	connect_energy_label()
 	connect_enemy_ai()
 	connect_enemy_health_label()
-	connect_player_health_label()
 	$VBoxContainer/BottomPanel/ToolBar/EndTurnButton.on_press_response = funcref(self, "end_player_turn")
 	$VBoxContainer/BottomPanel/ToolBar/BreakButton.connect("button_down", $VBoxContainer/BottomPanel/CombatGrid, "select_break_tool")
 
 
-func setup(enemy_type, enemy_defeat_func, player_health, _set_dw_player_node_health_func):
-	set_dw_player_node_health_func = _set_dw_player_node_health_func
-	combat_grid_node.health = player_health
-	combat_grid_node.player_health_label.text = "Health " + str(combat_grid_node.health)
+func setup(enemy_type, enemy_defeat_func):
+	set_player_health(get_player_health()) # Lol this line
+	combat_grid_node.remove_child(defeat_panel_node)
 	$EnemyAI.setup_enemy(enemy_type)
 	dream_scene_enemy_defeat_func = enemy_defeat_func
 	current_turn = "enemy"
@@ -42,7 +42,6 @@ func end_combat():
 func on_enemy_defeat():
 	enemy_defeated = true
 	dream_scene_enemy_defeat_func.call_func()
-	set_dw_player_node_health_func.call_func(combat_grid_node.health)
 
 
 func connect_energy_label():
@@ -53,11 +52,6 @@ func connect_energy_label():
 func connect_enemy_health_label():
 	$EnemyAI.health_label = $VBoxContainer/TopPanel/EnemyHealth
 	$VBoxContainer/BottomPanel/CombatGrid.enemy_take_damage_func = funcref($EnemyAI, "take_damage")
-	
-	
-func connect_player_health_label():
-	$VBoxContainer/BottomPanel/CombatGrid.player_health_label = $VBoxContainer/BottomPanel/PlayerHealth
-	$VBoxContainer/BottomPanel/PlayerHealth.text = "Health " + str($VBoxContainer/BottomPanel/CombatGrid.health)
 
 
 func end_player_turn():
@@ -85,6 +79,17 @@ func connect_enemy_ai():
 	$EnemyAI.name_label = $VBoxContainer/TopPanel/EnemyName
 
 
+func get_player_health():
+	return $Player.health
+
+
+func set_player_health(amount):
+	$Player.health = amount
+	$VBoxContainer/BottomPanel/PlayerHealth.text = "Health " + str($Player.health)
+	if $Player.health <= 0:
+		combat_grid_node.add_child(defeat_panel_node)
+
+
 func _input(event):
-	if event.is_action_pressed("test"):
-		$EnemyAI.place_attack()
+	if event is InputEventMouseButton && get_player_health() <= 0:
+		player_defeat_func.call_func()

@@ -13,11 +13,12 @@ var cursored_cell = -1
 var grid_cells = []
 var selected_shape: String
 onready var energy: int = 3
-onready var health = 1
 var player_energy_label
 var player_health_label
-var enemy_take_damage_func
-var player_defeat_func
+var enemy_take_damage_func: FuncRef
+var set_player_health_func: FuncRef
+var get_player_health_func: FuncRef
+var player_defeat_func: FuncRef
 var selected_tool: String
 
 func _ready():
@@ -152,29 +153,28 @@ func can_shape_fit(shape_to_fit: String, placement_id: int, user: String) -> boo
 
 
 func process_board_damage():
-	var player_damage = 0
-	var enemy_damage = 0
+	var damage_to_enemy = 0
+	var damage_to_player = 0
 	for id in range(0, grid_size.x * grid_size.y):
 		var grid_cell = get_grid_cell(id)
 		if (grid_cell.type == ShapeLibrary.CellType.P_DAMAGE):
 			if (grid_cell.enemy_type == ShapeLibrary.CellType.E_DAMAGE):
-				player_damage += 0.5
+				damage_to_enemy += 0.5
 			else:
-				player_damage += 1
+				damage_to_enemy += 1
 		
 		if (grid_cell.enemy_type == ShapeLibrary.CellType.E_DAMAGE):
 			if (grid_cell.type == ShapeLibrary.CellType.P_BLOCK):
-				enemy_damage += 0
+				damage_to_player += 0
 			elif (grid_cell.type == ShapeLibrary.CellType.P_DAMAGE):
-				enemy_damage += 0.5
+				damage_to_player += 0.5
 			else:
-				enemy_damage += 1
-	print("The player dealt " + str(player_damage) + " damage")
+				damage_to_player += 1
+	print("The player dealt " + str(damage_to_enemy) + " damage")
 	if is_instance_valid(enemy_take_damage_func) && enemy_take_damage_func.is_valid():
-		enemy_take_damage_func.call_func(player_damage)
-	print("The enemy dealt " + str(enemy_damage) + " damage")
-	health -= enemy_damage
-	player_health_label.text = "Health " + str(health)
+		enemy_take_damage_func.call_func(damage_to_enemy)
+	print("The enemy dealt " + str(damage_to_player) + " damage")
+	set_player_health_func.call_func(get_player_health_func.call_func() - damage_to_player)
 	
 	
 func clear_temp_cells():

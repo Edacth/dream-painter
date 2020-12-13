@@ -15,7 +15,8 @@ func _ready():
 	_err = $DreamWorld/DreamGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_scene_root", ["real"])
 	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_dungeon_signals")
 	$RealWorld/RealGUI.dream_button_up_func = funcref(self, "enter_dream")
-	$CombatScreen.switch_root_func = funcref(self, "return_from_combat")
+	combat_root.switch_root_func = funcref(self, "return_from_combat")
+	combat_root.player_defeat_func = funcref(self, "return_from_dream")
 	connect_inv_gui_signals()
 	switch_scene_root(state)
 	
@@ -76,25 +77,31 @@ func connect_sign_signals():
 			if !obj.is_connected("sign_interacted", dream_root.get_node("DialogManager"), "request_runtime_message"):
 				obj.connect("sign_interacted", dream_root.get_node("DialogManager"), "request_runtime_message")
 
+
 func process_pickup(item_id):
 	$Inventory.add_item(item_id, 1)
-		
+
+
 func connect_inv_gui_signals():
 	var _err = $Inventory.connect("inventory_updated", $DreamWorld/DreamGUI/Inventory, "update_display")
 	_err = $Inventory.connect("inventory_updated", $RealWorld/RealGUI/Inventory, "update_display")
 
+
 func enter_dream():
 	dream_root.generate_world()
+	combat_root.set_player_health(31)
 	dream_root.request_convo("potatoes_or_molasses")
 	switch_scene_root("dream")
 
 func start_combat(enemy_type, on_defeat_func):
 	var set_health_func = funcref(dream_root.get_node("Player"), "set_health")
-	var player_health = dream_root.get_node("Player").health
-	combat_root.setup(enemy_type, on_defeat_func, player_health, set_health_func)
+	combat_root.setup(enemy_type, on_defeat_func)
 	switch_scene_root("combat")
 
 func return_from_combat():
 	switch_scene_root("dream")
 	#dream_root.get_node("Player").nearest_interactable_object = dream_root.get_node("Player").get_interact_objects_in_range()
 	dream_root.get_node("Player").queue_nearest_object_check()
+
+func return_from_dream():
+	switch_scene_root("real")

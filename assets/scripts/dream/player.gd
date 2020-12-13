@@ -15,7 +15,6 @@ onready var interact_distance = 13
 var move_state = STILL
 var nearest_object_check_ticks: int = -1
 var block_input: bool = false
-onready var health: float = 30
 
 
 func _ready():
@@ -103,8 +102,4 @@ func get_interact_objects_in_range():
 	return null
 
 func queue_nearest_object_check():
-	nearest_object_check_ticks = 1	
-
-
-func set_health(new_health):
-	health = new_health
+	nearest_object_check_ticks = 1
