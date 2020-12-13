@@ -3,6 +3,20 @@ class_name Importer
 
 var main_terrain_tilemap: TileMap
 var main_background_tilemap: TileMap
+var objects_node: Node
+
+
+func clear_layout():
+	for node in objects_node.get_children():
+		node.queue_free()
+		objects_node.remove_child(node)
+	var used_cells = main_background_tilemap.get_used_cells()
+	for cell in used_cells:
+		main_background_tilemap.set_cellv(cell, -1)
+	used_cells = main_terrain_tilemap.get_used_cells()
+	for cell in used_cells:
+		main_terrain_tilemap.set_cellv(cell, -1)
+
 
 func import_scene(path, import_position, import_air, modifications = []):
 	var scene_to_import = load(path)
@@ -24,7 +38,7 @@ func import_scene(path, import_position, import_air, modifications = []):
 	# Copy remaining child nodes. These are objects of the room.
 	for obj in instance_root.get_children():
 		var old_parent = obj.get_parent()
-		var new_parent = self.get_parent()
+		var new_parent = objects_node
 		old_parent.remove_child(obj)
 		new_parent.add_child(obj)
 		obj.position -= instance_offset - (import_position * 8)

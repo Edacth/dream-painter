@@ -13,6 +13,9 @@
 
 [node name="DreamWorld" type="Node2D"]
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -400.0
@@ -21,6 +24,7 @@ margin_right = 1200.0
 margin_bottom = 1200.0
 color = Color( 0.0862745, 0.109804, 0.133333, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -42,6 +46,9 @@ __meta__ = {
 
 [node name="Importer" type="Node2D" parent="."]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
@@ -50,12 +57,24 @@ script = ExtResource( 2 )
 
 [node name="Generator" type="Node2D" parent="."]
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RoomLibrary" type="Node2D" parent="."]
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="DialogManager" type="Control" parent="."]
 script = ExtResource( 10 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
+}
+
+[node name="Objects" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
 }

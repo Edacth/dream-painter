@@ -5,6 +5,7 @@ func _ready():
 	$Generator.room_library = $RoomLibrary
 	$Importer.main_terrain_tilemap = $TerrainTilemap
 	$Importer.main_background_tilemap = $BackgroundTilemap
+	$Importer.objects_node = $Objects
 	connect_dialog_manager()
 	$DialogManager.read_conversations()
 	

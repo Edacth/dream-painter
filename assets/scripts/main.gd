@@ -54,16 +54,18 @@ func connect_dungeon_signals():
 	connect_npc_signals()
 	connect_sign_signals()
 
+
 func connect_pickup_signals():
-	var dream_root_children = dream_root.get_children()
-	for obj in dream_root_children:
+	var dream_root_objects = dream_root.get_node("Objects").get_children()
+	for obj in dream_root_objects:
 		if obj.is_in_group("pickup"):
 			if !obj.is_connected("picked_up", self, "process_pickup"):
 				obj.connect("picked_up", self, "process_pickup")
 
+
 func connect_npc_signals():
-	var dream_root_children = dream_root.get_children()
-	for obj in dream_root_children:
+	var dream_root_objects = dream_root.get_node("Objects").get_children()
+	for obj in dream_root_objects:
 		if obj.is_in_group("npc"):
 			if !obj.is_connected("combat_started", self, "start_combat"):
 				obj.connect("combat_started", self, "start_combat")
@@ -71,8 +73,8 @@ func connect_npc_signals():
 
 
 func connect_sign_signals():
-	var dream_root_children = dream_root.get_children()
-	for obj in dream_root_children:
+	var dream_root_objects = dream_root.get_node("Objects").get_children()
+	for obj in dream_root_objects:
 		if obj.is_in_group("sign"):
 			if !obj.is_connected("sign_interacted", dream_root.get_node("DialogManager"), "request_runtime_message"):
 				obj.connect("sign_interacted", dream_root.get_node("DialogManager"), "request_runtime_message")
@@ -90,18 +92,22 @@ func connect_inv_gui_signals():
 func enter_dream():
 	dream_root.generate_world()
 	combat_root.set_player_health(31)
+	dream_root.get_node("Player").position = Vector2(0, 0)
 	dream_root.request_convo("potatoes_or_molasses")
 	switch_scene_root("dream")
+
 
 func start_combat(enemy_type, on_defeat_func):
 	var set_health_func = funcref(dream_root.get_node("Player"), "set_health")
 	combat_root.setup(enemy_type, on_defeat_func)
 	switch_scene_root("combat")
 
+
 func return_from_combat():
 	switch_scene_root("dream")
 	#dream_root.get_node("Player").nearest_interactable_object = dream_root.get_node("Player").get_interact_objects_in_range()
 	dream_root.get_node("Player").queue_nearest_object_check()
+
 
 func return_from_dream():
 	switch_scene_root("real")

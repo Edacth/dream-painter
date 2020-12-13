@@ -23,6 +23,7 @@ class LayoutRoom:
 
 
 func on_values_assigned():
+	importer.clear_layout()
 	randomize()
 	generate_layout()
 	
