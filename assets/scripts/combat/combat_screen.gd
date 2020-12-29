@@ -19,12 +19,13 @@ func _ready():
 	connect_enemy_ai()
 	connect_enemy_health_label()
 	$VBoxContainer/BottomPanel/ToolBar/EndTurnButton.on_press_response = funcref(self, "end_player_turn")
-	$VBoxContainer/BottomPanel/ToolBar/BreakButton.connect("button_down", $VBoxContainer/BottomPanel/CombatGrid, "select_break_tool")
+	var _err = $VBoxContainer/BottomPanel/ToolBar/BreakButton.connect("button_down", $VBoxContainer/BottomPanel/CombatGrid, "select_break_tool")
 
 
 func setup(enemy_type, enemy_defeat_func):
 	set_player_health(get_player_health()) # Lol this line
-	combat_grid_node.remove_child(defeat_panel_node)
+	if defeat_panel_node.get_parent() != null:
+		combat_grid_node.remove_child(defeat_panel_node)
 	$EnemyAI.setup_enemy(enemy_type)
 	dream_scene_enemy_defeat_func = enemy_defeat_func
 	current_turn = "enemy"

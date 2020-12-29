@@ -6,6 +6,7 @@ var dream_root
 var combat_root
 var pigment_count = 0
 
+
 func _ready():
 	real_root = $RealWorld
 	dream_root = $DreamWorld
@@ -15,10 +16,12 @@ func _ready():
 	_err = $DreamWorld/DreamGUI/Debug/Panel/SwitchButton.connect("button_down", self, "switch_scene_root", ["real"])
 	_err = $DreamWorld/Generator.connect("generation_finished", self, "connect_dungeon_signals")
 	$RealWorld/RealGUI.dream_button_up_func = funcref(self, "enter_dream")
+	$RealWorld/RealGUI.shop_node.setup($Inventory)
 	combat_root.switch_root_func = funcref(self, "return_from_combat")
 	combat_root.player_defeat_func = funcref(self, "return_from_dream")
 	connect_inv_gui_signals()
 	switch_scene_root(state)
+	
 	
 
 func _unhandled_input(event):

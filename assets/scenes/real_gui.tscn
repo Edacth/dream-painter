@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scenes/inventory_gui.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/section_gui.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/textures/canvas.png" type="Texture" id=5]
 [ext_resource path="res://assets/scripts/real/real_gui.gd" type="Script" id=6]
 [ext_resource path="res://assets/scripts/real/navbar_button.gd" type="Script" id=7]
+[ext_resource path="res://assets/scenes/real_scenes/shop_entry.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scripts/real/shop_gui.gd" type="Script" id=9]
 
 [node name="RealGUI" type="CanvasLayer"]
 script = ExtResource( 6 )
@@ -41,59 +43,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inventory" parent="." instance=ExtResource( 1 )]
+[node name="Shop" type="Panel" parent="."]
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+margin_top = 40.0
+margin_right = -0.599976
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="NavBar" type="MarginContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="Shop"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -200.0
-margin_right = 200.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="NavBar"]
-margin_right = 400.0
-margin_bottom = 40.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="NavBar/Panel"]
-anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 6.0
-margin_bottom = -5.0
-custom_constants/separation = 40
-alignment = 1
+margin_left = -304.0
+margin_right = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+columns = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EaselButton" type="Button" parent="NavBar/Panel/HBoxContainer"]
-margin_left = 65.0
-margin_right = 110.0
-margin_bottom = 29.0
-text = "Easel"
-script = ExtResource( 7 )
-section = "easel"
+[node name="ShopEntry" parent="Shop/GridContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 200.0
+margin_bottom = 200.0
 
-[node name="InventoryButton" type="Button" parent="NavBar/Panel/HBoxContainer"]
-margin_left = 150.0
-margin_right = 223.0
-margin_bottom = 29.0
-text = "Inventory"
-script = ExtResource( 7 )
-section = "inventory"
+[node name="ShopEntry2" parent="Shop/GridContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 204.0
+margin_right = 404.0
+margin_bottom = 200.0
 
-[node name="BedroomButton" type="Button" parent="NavBar/Panel/HBoxContainer"]
-margin_left = 263.0
-margin_right = 334.0
-margin_bottom = 29.0
-text = "Bedroom"
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-section = "bedroom"
+[node name="ShopEntry3" parent="Shop/GridContainer" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 408.0
+margin_right = 608.0
+margin_bottom = 200.0
 
 [node name="Easel" type="HBoxContainer" parent="."]
 anchor_left = 0.5
@@ -179,7 +173,6 @@ margin_top = 336.0
 margin_bottom = 500.0
 
 [node name="Bedroom" type="Control" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -218,3 +211,68 @@ text = "Dream"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NavBar" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_right = 200.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="NavBar"]
+margin_right = 400.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NavBar/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 6.0
+margin_bottom = -5.0
+custom_constants/separation = 35
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EaselButton" type="Button" parent="NavBar/Panel/HBoxContainer"]
+margin_left = 31.0
+margin_right = 76.0
+margin_bottom = 29.0
+text = "Easel"
+script = ExtResource( 7 )
+section = "easel"
+
+[node name="InventoryButton" type="Button" parent="NavBar/Panel/HBoxContainer"]
+margin_left = 111.0
+margin_right = 184.0
+margin_bottom = 29.0
+text = "Inventory"
+script = ExtResource( 7 )
+section = "inventory"
+
+[node name="BedroomButton" type="Button" parent="NavBar/Panel/HBoxContainer"]
+margin_left = 219.0
+margin_right = 290.0
+margin_bottom = 29.0
+text = "Bedroom"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+section = "bedroom"
+
+[node name="BedroomButton2" type="Button" parent="NavBar/Panel/HBoxContainer"]
+margin_left = 325.0
+margin_right = 368.0
+margin_bottom = 29.0
+text = "Shop"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+section = "shop"
+
+[node name="Inventory" parent="." instance=ExtResource( 1 )]
