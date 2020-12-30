@@ -5,7 +5,7 @@ signal combination_updated(color)
 var active_color
 var active_inspiration
 
-onready var color_picker = preload("res://assets/scenes/color_picker.tscn")
+onready var color_picker = preload("res://assets/scenes/real_scenes/easel/color_picker.tscn")
 
 func _ready():
 	var _err = $ColorButton.connect("button_up", self, "show_color_picker")

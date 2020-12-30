@@ -48,7 +48,9 @@ func connect_navbar():
 
 
 func connect_bedroom():
-	var _err = $Bedroom/Panel/DreamButton.connect("button_up", self, "relay_dream_button_up")
+	var _err = $Bedroom/EquippedPanel/VSplitContainer/ButtonPanel/DreamButton.connect("button_up", 
+		self, "relay_dream_button_up")
+	
 
 
 func relay_dream_button_up():

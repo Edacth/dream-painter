@@ -2,8 +2,10 @@ extends Node2D
 class_name Inventory
 
 var slots = []
+var unlocked_shapes = []
 
-signal inventory_updated
+signal inventory_updated(item_name, amount)
+signal shape_unlocked(shape)
 
 class ItemSlot:
 	var name
@@ -40,3 +42,8 @@ func remove_item(item_name: String, amount: int) -> void:
 			slot.amount = clamp(slot.amount - amount, 0, 9223372036854775807)
 			emit_signal("inventory_updated", item_name, slot.amount)
 			break
+
+
+func unlock_shape(shape: String) -> void:
+	unlocked_shapes.append(shape)
+	emit_signal("shape_unlocked", shape)
