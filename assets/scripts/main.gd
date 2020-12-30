@@ -104,7 +104,8 @@ func enter_dream():
 
 func start_combat(enemy_type, on_defeat_func):
 	var set_health_func = funcref(dream_root.get_node("Player"), "set_health")
-	combat_root.setup(enemy_type, on_defeat_func)
+	var equipped_shapes = real_root.get_node("RealGUI").bedroom_node.get_equipped_shapes()
+	combat_root.setup(enemy_type, on_defeat_func, equipped_shapes)
 	switch_scene_root("combat")
 
 

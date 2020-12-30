@@ -14,7 +14,6 @@ func _ready():
 	combat_grid_node = $VBoxContainer/BottomPanel/CombatGrid
 	combat_grid_node.get_player_health_func = funcref(self, "get_player_health")
 	combat_grid_node.set_player_health_func = funcref(self, "set_player_health")
-	$VBoxContainer/BottomPanel/ShapeBar.shape_select_response = funcref($VBoxContainer/BottomPanel/CombatGrid, "change_shape")
 	connect_energy_label()
 	connect_enemy_ai()
 	connect_enemy_health_label()
@@ -22,7 +21,10 @@ func _ready():
 	var _err = $VBoxContainer/BottomPanel/ToolBar/BreakButton.connect("button_down", $VBoxContainer/BottomPanel/CombatGrid, "select_break_tool")
 
 
-func setup(enemy_type, enemy_defeat_func):
+func setup(enemy_type, enemy_defeat_func, equipped_shapes):
+	combat_grid_node.setup()
+	$VBoxContainer/BottomPanel/ShapeBar.shape_select_response = funcref($VBoxContainer/BottomPanel/CombatGrid, "change_shape")
+	$VBoxContainer/BottomPanel/ShapeBar.setup(equipped_shapes)
 	set_player_health(get_player_health()) # Lol this line
 	if defeat_panel_node.get_parent() != null:
 		combat_grid_node.remove_child(defeat_panel_node)

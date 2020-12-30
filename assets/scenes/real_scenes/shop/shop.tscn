@@ -1,10 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://assets/scripts/real/shop_gui.gd" type="Script" id=2]
-[ext_resource path="res://assets/scenes/real_scenes/shop/shop_entry.tscn" type="PackedScene" id=3]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
 [node name="Shop" type="Panel"]
 anchor_left = 0.1
@@ -33,32 +29,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShopEntry" parent="GridContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 200.0
-margin_bottom = 200.0
-custom_styles/panel = SubResource( 1 )
-
-[node name="ShopEntry2" parent="GridContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 204.0
-margin_right = 404.0
-margin_bottom = 200.0
-custom_styles/panel = SubResource( 1 )
-
-[node name="ShopEntry3" parent="GridContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 408.0
-margin_right = 608.0
-margin_bottom = 200.0
-custom_styles/panel = SubResource( 1 )
-
 [node name="KinshipButton" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+margin_right = 91.0
 text = "Free Kinship"
 __meta__ = {
 "_edit_use_anchors_": false

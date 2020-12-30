@@ -21,9 +21,11 @@ var get_player_health_func: FuncRef
 var player_defeat_func: FuncRef
 var selected_tool: String
 
-func _ready():
+
+func setup():
 	create_cells(grid_size)
 	resize_cursor_cell()
+	
 
 
 func create_cells(size: Vector2):

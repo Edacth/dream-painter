@@ -27,6 +27,7 @@ func setup(entry_name, _cost: ShopCost, _exact_cost_func, _has_item_func, result
 	shape_to_unlock = _shape_to_unlock
 	exact_cost_func = _exact_cost_func
 	has_item_func = _has_item_func
+	$Icon.texture = load(ShapeLibrary.get_player_shape(shape_to_unlock).icon_path)
 
 
 func attempt_buy():

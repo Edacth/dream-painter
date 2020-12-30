@@ -9,15 +9,17 @@ func _ready() -> void:
 	_err = connect("mouse_exited", self, "on_mouse_exited")
 
 
-func setup(_shape: String):
+func setup(_shape: String, _select_func: FuncRef):
 	shape = _shape
+	select_func = _select_func
 	$Label.text = shape.capitalize()
+	$Icon.texture = load(ShapeLibrary.get_player_shape(shape).icon_path)
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if mouse_over:
-			select_func.call_func()
+			select_func.call_func(shape)
 			accept_event()
 
 

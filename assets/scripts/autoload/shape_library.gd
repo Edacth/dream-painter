@@ -11,77 +11,79 @@ enum CellType {
 var player_shapes = []
 var enemy_shapes = []
 
+
 func _ready() -> void:
 	read_player_shapes()
 	read_enemy_shapes()
 
+
 func read_player_shapes() -> void:
-	# test
-	var cells = [Cell.new(Vector2(0, 0), CellType.P_DAMAGE)]
-	var shape = CellShape.new("test", cells)
-	player_shapes.append(shape)
+	var icon_path_dir = "res://assets/textures/shape_icons/"
+	var preview_path_dir = "res://assets/textures/shape_previews/"
+	var file = File.new()
 	
-	# tall
-	cells = [
-		Cell.new(Vector2(0, 0), CellType.P_DAMAGE),
-		Cell.new(Vector2(0, -1), CellType.P_DAMAGE)]
-	shape = CellShape.new("tall", cells)
-	player_shapes.append(shape)
-	
-	# sword
-	cells = [
-		Cell.new(Vector2(0, 0), CellType.P_NEUTRAL),
-		Cell.new(Vector2(0, -1), CellType.P_DAMAGE),
-		Cell.new(Vector2(0, -2), CellType.P_DAMAGE)]
-	shape = CellShape.new("sword", cells)
-	player_shapes.append(shape)
-	
-	# shield
-	cells = [
-		Cell.new(Vector2(0, 0), CellType.P_NEUTRAL),
-		Cell.new(Vector2(0, -1), CellType.P_BLOCK),
-		Cell.new(Vector2(1, 0), CellType.P_BLOCK),
-		Cell.new(Vector2(1, -1), CellType.P_BLOCK)]
-	shape = CellShape.new("shield", cells)
-	player_shapes.append(shape)
-	
-	# down_sword
-	cells = [
-		Cell.new(Vector2(0, 0), CellType.P_NEUTRAL),
-		Cell.new(Vector2(0, 1), CellType.P_DAMAGE),
-		Cell.new(Vector2(0, 2), CellType.P_DAMAGE)]
-	shape = CellShape.new("down_sword", cells)
-	player_shapes.append(shape)
+	file.open("res://player_shapes.json", File.READ)
+	var json = JSON.parse(file.get_as_text())
+	var result = json.result
+	# Make sure json is okay
+	if json.error == OK && typeof(result) == TYPE_DICTIONARY:
+		# parse shapes
+		var shapes = []
+		for s in result["shapes"]:
+			var cells: Array = []
+			for c in s["cells"]:
+				#Position
+				var position = Vector2(c["pos"][0], c["pos"][1])
+				var type = c["type"]
+				cells.append(Cell.new(position, type))
+			
+			var icon_path = icon_path_dir + s["name"] + ".png"
+			var preview_path = preview_path_dir + s["name"] + "_preview.png"
+			var new_shape = CellShape.new(s["name"], s["display_name"], cells, icon_path, preview_path)
+			player_shapes.append(new_shape)
+
 
 func read_enemy_shapes() -> void:
 	# test
 	var cells = [Cell.new(Vector2(0, 0), CellType.E_DAMAGE)]
-	var shape = CellShape.new("test", cells)
+	var shape = CellShape.new("test", "", cells, "", "")
 	enemy_shapes.append(shape)
-	
+
+
 func get_player_shape(name: String) -> CellShape:
 	for shape in player_shapes:
 		if (shape.name == name):
 			return shape
-	return null
-	
+	return player_shapes[0] # return blank shape
+
+
 func get_enemy_shape(name: String) -> CellShape:
 	for shape in enemy_shapes:
 		if (shape.name == name):
 			return shape
 	return null
-	
+
+
 class CellShape:
 	var name = ""
+	var display_name = ""
 	var cells = []
+	var icon_path: String
+	var preview_path: String
 	
-	func _init(_name: String, _cells: Array):
+	
+	func _init(_name: String, _display_name: String, _cells: Array, _icon_path: String, _preview_path: String):
 		name = _name
+		display_name = _display_name
 		cells = _cells
-	
+		icon_path = _icon_path
+		preview_path = _preview_path
+
+
 class Cell:
 	var position
 	var type = 0
+	
 	
 	func _init(_position: Vector2, _type: int):
 		position = _position

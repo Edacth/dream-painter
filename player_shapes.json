@@ -1,0 +1,39 @@
+{
+    "shapes": [
+        {
+            "name": "blank",
+            "display_name": "",
+            "cells": [
+                { "pos": [0, 0], "type": 0 }
+            ]
+        },
+        {
+            "name": "sword",
+            "display_name": "Red Sword",
+            "cells": [
+                { "pos": [0, 0], "type": 0 },
+                { "pos": [0, -1], "type": 1 },
+                { "pos": [0, -2], "type": 1 }
+            ]
+        },
+        {
+            "name": "shield",
+            "display_name": "Blue Shield",
+            "cells": [
+                { "pos": [0, 0], "type": 0 },
+                { "pos": [0, -1], "type": 2 },
+                { "pos": [1, 0], "type": 2 },
+                { "pos": [1, -1], "type": 2 }
+            ]
+        },
+        {
+            "name": "down_sword",
+            "display_name": "Down Sword",
+            "cells": [
+                { "pos": [0, 0], "type": 0 },
+                { "pos": [0, 1], "type": 1 },
+                { "pos": [0, 2], "type": 1 }
+            ]
+        }
+    ]
+}

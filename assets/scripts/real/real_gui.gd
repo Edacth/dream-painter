@@ -6,10 +6,12 @@ onready var easel_node = $Easel
 onready var bedroom_node = $Bedroom
 onready var shop_node = $Shop
 
+
 func _ready():
 	connect_navbar()
 	connect_bedroom()
 	switch_section("easel")
+
 
 func switch_section(section):
 	var node_to_add
@@ -20,15 +22,13 @@ func switch_section(section):
 			nodes_to_remove.append(bedroom_node)
 			nodes_to_remove.append(shop_node)
 		"inventory":
-			print("inventory")
+			return
 			
 		"bedroom":
-			print("bedroom")
 			node_to_add = bedroom_node
 			nodes_to_remove.append(easel_node)
 			nodes_to_remove.append(shop_node)
 		"shop":
-			print("shop")
 			node_to_add = shop_node
 			nodes_to_remove.append(easel_node)
 			nodes_to_remove.append(bedroom_node)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/down_sword.png-69b507ee9e04076b4ff1dccef66faab1.stex"
+path="res://.import/blank_preview.png-808a546f5fee30c272f61f1e3f0cd23d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/combat_screen/weapons/down_sword.png"
-dest_files=[ "res://.import/down_sword.png-69b507ee9e04076b4ff1dccef66faab1.stex" ]
+source_file="res://assets/textures/shape_previews/blank_preview.png"
+dest_files=[ "res://.import/blank_preview.png-808a546f5fee30c272f61f1e3f0cd23d.stex" ]
 
 [params]
 
