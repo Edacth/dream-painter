@@ -36,7 +36,7 @@ func setup(inventory: Node):
 	for i in range(3):
 		add_equipped_slot(i)
 	select_equipped_slot(0)
-	add_selection_slot("sword")
+	#add_selection_slot("sword")
 	#add_selection_slot("shield")
 
 
@@ -75,11 +75,11 @@ func set_equipped_slot(slot_index: int, _shape: String):
 	var corre_node = equipped_slots[slot_index].corresponding_node
 	corre_node.get_node("Label").text = _shape
 	var icon_path = cell_shape.icon_path
-	if file_to_check.file_exists(icon_path):
-		corre_node.get_node("Icon").texture = load(icon_path)
+	#if file_to_check.file_exists(icon_path):
+	corre_node.get_node("Icon").texture = load(icon_path)
 	var preview_path = cell_shape.preview_path
-	if file_to_check.file_exists(preview_path):
-		corre_node.get_node("Preview").texture = load(preview_path)
+	#if file_to_check.file_exists(preview_path):
+	corre_node.get_node("Preview").texture = load(preview_path)
 
 
 func select_equipped_slot(slot_index: int):

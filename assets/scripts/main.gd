@@ -18,6 +18,7 @@ func _ready():
 	$RealWorld/RealGUI.dream_button_up_func = funcref(self, "enter_dream")
 	$RealWorld/RealGUI.shop_node.setup($Inventory)
 	$RealWorld/RealGUI.bedroom_node.setup($Inventory)
+	$Inventory.setup()
 	combat_root.switch_root_func = funcref(self, "return_from_combat")
 	combat_root.player_defeat_func = funcref(self, "return_from_dream")
 	connect_inv_gui_signals()

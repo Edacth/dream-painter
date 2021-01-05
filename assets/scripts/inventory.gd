@@ -18,6 +18,9 @@ func _ready():
 	slots.append(ItemSlot.new("kinship"))
 	slots.append(ItemSlot.new("fear"))
 
+func setup():
+	unlock_shape("sword")
+
 func add_item(item_name: String, amount: int) -> void:
 	for slot in slots:
 		if item_name == slot.name:

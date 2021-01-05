@@ -6,6 +6,9 @@ onready var cell_node = preload("res://assets/scenes/combat_scenes/grid_cell.tsc
 onready var red_tint = preload("res://assets/textures/combat_screen/red_tint.png")
 onready var blue_tint = preload("res://assets/textures/combat_screen/blue_tint.png")
 onready var grey_tint = preload("res://assets/textures/combat_screen/grey_tint.png")
+onready var red_frame = preload("res://assets/textures/combat_screen/red_frame.png")
+onready var blue_frame = preload("res://assets/textures/combat_screen/blue_frame.png")
+onready var grey_frame = preload("res://assets/textures/combat_screen/grey_frame.png")
 onready var cursored_cell_texture = preload("res://assets/textures/combat_screen/cursored_cell.png")
 onready var e_attack_tex = preload("res://assets/textures/combat_screen/weapons/enemy_attack.png")
 export var grid_size: Vector2 = Vector2(7,7)
@@ -24,8 +27,6 @@ var selected_tool: String
 
 func setup():
 	create_cells(grid_size)
-	resize_cursor_cell()
-	
 
 
 func create_cells(size: Vector2):
@@ -43,19 +44,33 @@ func create_cells(size: Vector2):
 		grid_cells.append(new_cell)
 
 
-func resize_cursor_cell():
-	#var cell_size = $GridContainer.get_child(0).rect_size
-	$CursorCell.rect_size.x = $GridContainer.rect_size.x / grid_size.x
-	$CursorCell.rect_size.y = $GridContainer.rect_size.y / grid_size.y
-
 func set_cursor_cell(id: int):
 	cursored_cell = id
-	get_grid_cell(id).get_node("Cursor").texture = cursored_cell_texture
+	var grid_cell = get_grid_cell(id)
+	grid_cell.get_node("Cursor").texture = cursored_cell_texture
+	var shape = ShapeLibrary.get_player_shape(selected_shape)
+	for cell in shape.cells:
+		var relative_id = get_relative_cell_id(id, cell.position)
+		if relative_id == -1: continue
+		# todo: replace this if else with a dictionary?
+		if cell.type == ShapeLibrary.CellType.EMPTY:
+			get_grid_cell(relative_id).get_node("PreviewFrame").texture = null
+		elif cell.type == ShapeLibrary.CellType.P_NEUTRAL:
+			get_grid_cell(relative_id).get_node("PreviewFrame").texture = grey_frame
+		elif cell.type == ShapeLibrary.CellType.P_DAMAGE:
+			get_grid_cell(relative_id).get_node("PreviewFrame").texture = red_frame
+		elif cell.type == ShapeLibrary.CellType.P_BLOCK:
+			get_grid_cell(relative_id).get_node("PreviewFrame").texture = blue_frame
 
 
 func clear_cursor_cell(id: int):
 	cursored_cell = -1
 	get_grid_cell(id).get_node("Cursor").texture = null
+	var shape = ShapeLibrary.get_player_shape(selected_shape)
+	for cell in shape.cells:
+		var relative_id = get_relative_cell_id(id, cell.position)
+		if relative_id == -1: continue
+		get_grid_cell(relative_id).get_node("PreviewFrame").texture = null
 
 
 func get_grid_cell(id: int):

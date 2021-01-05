@@ -38,7 +38,11 @@ func read_player_shapes() -> void:
 				cells.append(Cell.new(position, type))
 			
 			var icon_path = icon_path_dir + s["name"] + ".png"
+			if !file.file_exists(icon_path):
+				icon_path = icon_path_dir + "blank.png"
 			var preview_path = preview_path_dir + s["name"] + "_preview.png"
+			if !file.file_exists(preview_path):
+				preview_path = preview_path_dir + "blank_preview.png"
 			var new_shape = CellShape.new(s["name"], s["display_name"], cells, icon_path, preview_path)
 			player_shapes.append(new_shape)
 

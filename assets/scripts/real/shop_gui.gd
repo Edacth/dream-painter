@@ -11,6 +11,7 @@ func setup(_inventory_node):
 	inventory_node = _inventory_node
 	create_shop_entry("shield", ShopCost.new("kinship", 2), funcref(self, "unlock_shape"), "shield")
 	create_shop_entry("down sword", ShopCost.new("kinship", 1), funcref(self, "unlock_shape"), "down_sword")
+	create_shop_entry("error", ShopCost.new("kinship", 1), funcref(self, "unlock_shape"), "error")
 	var _err = $KinshipButton.connect("button_up", inventory_node, "add_item", ["kinship", 1])
 
 
